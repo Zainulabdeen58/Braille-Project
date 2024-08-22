@@ -5,12 +5,20 @@ module.exports = {
   ],
   theme: {
     extend: {
-      screens: {
-        'xsm': '320px',
-        // => @media (min-width: 992px) { ... }
+      colors :{
+            primary: "#000000",
+            secondary:"#ffffff",
+            secondary_alt: "#a4e84c",
       },
+      screens: {
+           'xsm': '320px', 
+           'sm':'425px',
+           'md' : '768px',
+           'lg' : '1024px',
+           'xlg' : '1440px',         
+      },
+      
     },
   },
   plugins: [],
 }
-
