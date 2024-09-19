@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Header from "../Components/Header";
+// import Header from "../Components/Header";
+import Home from "../Pages/Home";
 import ArtShop from "../Pages/ArtWork/index";
 import SingleProduct from "../Pages/ArtWork/SingleProduct";
 import Print3D from "../Pages/Print3D/Print3D/index";
@@ -9,15 +10,15 @@ import About from "../Pages/About/About";
 const routers =createBrowserRouter([
     {
         path: "/",
-        element : <Header/>
+        element : <Home/>
     },
     {
         path:"/about-us",
-        element: <About/>
+        element: <Home/>
     },
     {
         path:"/exhibitions",
-        element:"<div>exhibition<div/>"
+        element: <Home/>
     },
     {
         path:"/artwork-shop",
@@ -37,7 +38,7 @@ const routers =createBrowserRouter([
     },
     {
         path:"/contact-us",
-        element:"<div>Contact Us<div/>"
+        element:<Home/>
     },
     {
         path:"/view-cart",
