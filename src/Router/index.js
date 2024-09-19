@@ -6,7 +6,7 @@ import SingleProduct from "../Pages/ArtWork/SingleProduct";
 import Print3D from "../Pages/Print3D/Print3D/index";
 import Print3DSingleProduct from "../Pages/Print3D/Print3D/SingleProduct"
 import CartContents from "../Components/CartContent";
-import About from "../Pages/About/About";
+// import About from "../Pages/About/About";
 const routers =createBrowserRouter([
     {
         path: "/",
