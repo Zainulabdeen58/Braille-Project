@@ -25,40 +25,6 @@ const CartContents = () => {
   };
 
   return (
-    // <div className="container mx-auto p-4">
-    //   <h2 className="text-2xl font-bold mb-4">Cart Items</h2>
-
-    //   {cartItems.length === 0 ? (
-    //     <p className="text-gray-500">Your cart is empty.</p>
-    //   ) : (
-    //     <div className="space-y-4">
-    //       {cartItems.map((item) => (
-    //         <div
-    //           key={item.id}
-    //           className="flex items-center bg-white shadow-md rounded-lg p-4"
-    //         >
-    //           {/* Image */}
-    //           <div className="w-20 h-20 overflow-hidden rounded-lg">
-    //             <img
-    //               src={item.img}
-    //               alt={item.name}
-    //               className="object-cover w-full h-full"
-    //             />
-    //           </div>
-
-    //           {/* Details */}
-    //           <div className="ml-4 flex-1">
-    //             <h3 className="text-lg font-semibold">{item.name}</h3>
-    //             <p className="text-gray-600">${item.price}</p>
-    //           </div>
-
-    //
-    //         </div>
-    //       ))}
-    //     </div>
-    //   )}
-    // </div>
-
     <div className="h-auto">
       
         <div className="grid">

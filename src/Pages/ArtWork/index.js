@@ -7,8 +7,10 @@ import { addToCart } from "../../Redux/cart/cartslice";
 import { FaHeart } from "react-icons/fa";
 import ViewCart from "../../Components/ViewCart";
 import Navbar from "../../Components/Navbar"
+import { toast } from 'react-toastify';
 
-function Print3D() {
+
+function ArtWork() {
   const [isFavorited, setIsFavorited] = useState(false);
   const toggleFavorite = (id) => {
     setIsFavorited((prevState) => ({
@@ -18,8 +20,20 @@ function Print3D() {
   };
   const dispatch = useDispatch();
   const handleAddToCart = (user) => {
-    console.log(user);
     dispatch(addToCart(user));
+    console.log(user);
+    toast.success('Item Add', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    
+
   };
   return (
     <>
@@ -29,11 +43,12 @@ function Print3D() {
 
       <section
         id="Projects"
-        className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-around gap-y-20 gap-x-14 lg:gap-x-10 xlg:gap-x-14 mt-2 mb-5"
+        className="w-fit mx-auto grid grid-cols-1 justify-items-center justify-around gap-y-20 gap-x-14 lg:grid-cols-4 md:grid-cols-2 lg:gap-x-9 xlg:gap-x-14 2xlg:gap-x-20 mt-2 mb-5"
       >
+        {/* Card Image Section */}
         {Data.map((product) => {
           return (
-            <div key={product.id} className="relative w-72 lg:w-56 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <div key={product.id} className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl lg:w-52 xlg:w-64">
               <NavLink to={`/artwork-shop/${product.id}`}>
                 <img
                   src={product.img}
@@ -51,9 +66,11 @@ function Print3D() {
                   }`}
                 />
               </div>
-              <div className="px-4 py-3 w-72 lg:w-56">
+
+              {/* Card Content  Section*/}
+              <div className="px-4 py-3 w-72 lg:w-52 xlg:w-64">
                 <span className="text-gray-400 mr-3 uppercase text-xs">
-                  Classic
+                  {product.dimension}
                 </span>
                 <p className="text-lg font-bold text-black truncate block capitalize">
                   {product.artist}
@@ -75,6 +92,7 @@ function Print3D() {
                         handleAddToCart(product);
                       }}
                     >
+                      
                       <path
                         fillRule="evenodd"
                         d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
@@ -94,4 +112,4 @@ function Print3D() {
   );
 }
 
-export default Print3D;
+export default ArtWork;

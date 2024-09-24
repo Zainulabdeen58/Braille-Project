@@ -7,6 +7,7 @@ import Data from "../../../API/3Ddata";
 import Header from "../../../Components/Header";
 import Navbar from "../../../Components/Navbar";
 import ViewCart from "../../../Components/ViewCart";
+import { toast } from "react-toastify";
 
 function Print3D() {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -18,8 +19,20 @@ function Print3D() {
   };
   const dispatch = useDispatch();
   const handleAddToCart = (user) => {
-    console.log(user);
     dispatch(addToCart(user));
+    console.log(user);
+    toast.success('Item Add', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    
+
   };
   return (
     <>
@@ -28,7 +41,8 @@ function Print3D() {
       <ViewCart/>
       <section
         id="Projects"
-        className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-around gap-y-20 gap-x-14 lg:gap-x-10 xlg:gap-x-14 mt-5 mb-5"
+        className="w-fit mx-auto grid grid-cols-1 justify-items-center justify-around gap-y-20 gap-x-14 lg:grid-cols-4 md:grid-cols-2  lg:gap-x-10  xlg:gap-x-14 2xlg:gap-x-24 mt-2 mb-5"
+
       >
         {Data.map((product) => {
           return (
@@ -55,7 +69,7 @@ function Print3D() {
               </div>
               <div className="px-4 py-3 w-72 lg:w-56">
                 <span className="text-gray-400 mr-3 uppercase text-xs">
-                  Classic
+                  {product.dimension}
                 </span>
                 <p className="text-lg font-bold text-black truncate block capitalize">
                   {product.artist}

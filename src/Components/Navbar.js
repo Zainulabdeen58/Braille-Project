@@ -46,7 +46,7 @@ function Navbar() {
             
             {/* Navbar Larger screen */}
             <div className="hidden sm:block">
-              <div className="flex space-x-1 md:space-x-14">
+              <div className="flex space-x-1 md:space-x-14 lg:space-x-16">
                 {navigation.map((item) => (
                   <NavLink
                     key={item.name}
