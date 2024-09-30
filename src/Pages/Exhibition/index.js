@@ -2,7 +2,7 @@ import React from "react";
 import * as Image from "../../Assets/Main section Img";
 import Container from "../../Components/Container";
 
-function Home() {
+function Exhibition() {
   return (
     <Container>
       <div className="h-screen">
@@ -90,4 +90,5 @@ function Home() {
   );
 }
 
-export default Home;
+
+export default Exhibition;

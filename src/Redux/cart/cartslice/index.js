@@ -30,12 +30,25 @@ const cartSlice = createSlice({
         existingItem.quantity += 1;
         localStorage.setItem('cartItems', JSON.stringify(state.items));
       }
+      // const existingItem = state.items.find(item => item.id === action.payload.id);
+      
+      // if (existingItem) {
+      //   existingItem.quantity += 1; // Increase quantity if the item already exists
+      // } else {
+      //   state.items.push(action.payload); // Add new item with quantity of 1
+      // }
+      
+      localStorage.setItem('cartItems', JSON.stringify(state.items)); // Save updated cart to localStorage
     },
     
     decreaseQuantity: (state, action) => {
       const existingItem = state.items.find(item => item.id === action.payload.id);
       if (existingItem && existingItem.quantity > 1) {
         existingItem.quantity -= 1;
+        localStorage.setItem('cartItems', JSON.stringify(state.items));
+      } else if (existingItem && existingItem.quantity === 1) {
+        // Optionally remove the item if quantity goes to zero
+        state.items = state.items.filter(item => item.id !== action.payload.id);
         localStorage.setItem('cartItems', JSON.stringify(state.items));
       }
     }

@@ -1,29 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-// import Header from "../Components/Header";
 import Home from "../Pages/Home";
 import ArtShop from "../Pages/ArtWork/index";
 import SingleProduct from "../Pages/ArtWork/SingleProduct";
 import Print3D from "../Pages/Print3D/Print3D/index";
 import Print3DSingleProduct from "../Pages/Print3D/Print3D/SingleProduct"
-import CartContents from "../Components/CartContent";
-import App from "../App";
-// import About from "../Pages/About/About";
+import CartContents from "../Components/ReviewCart";
+import About from "../Pages/About/index"
+import Exhibition from "../Pages/Exhibition";
+import Checkout from "../Components/Checkout";
+
 const routers =createBrowserRouter([
     {
         path: "/",
         element : <Home/>
     },
     {
-        path: "/App",
-        element : <App/>
-    },
-    {
         path:"/about-us",
-        element: <Home/>
+        element: <About/>
     },
     {
         path:"/exhibitions",
-        element: <Home/>
+        element: <Exhibition/>
     },
     {
         path:"/artwork-shop",
@@ -48,7 +45,11 @@ const routers =createBrowserRouter([
     {
         path:"/view-cart",
         element:<CartContents/>
-    }
+    },
+    {
+        path:"/checkout",
+        element:<Checkout/>
+    },
 
 ]);
 

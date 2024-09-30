@@ -7,7 +7,7 @@ function Header() {
     <>
     
       <div id="header"
-        className="bg-primary w-full h-[15vh] flex justify-center ">
+        className="bg-primary w-full h-[17vh] flex justify-center ">
         <picture>
           {/* <source media="(max-width: 425px)" srcSet={smLogo} /> */}
           <img className="w-full " src={smLogo} alt="logo" />
