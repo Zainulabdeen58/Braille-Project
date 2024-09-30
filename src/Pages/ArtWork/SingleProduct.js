@@ -3,8 +3,13 @@ import { useParams } from "react-router-dom";
 import Data from "../../API/artworkdata";
 import Container from "../../Components/Container";
 import { useDispatch } from "react-redux";
-import { increaseQuantity, decreaseQuantity, addToCart } from "../../Redux/cart/cartslice";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  addToCart,
+} from "../../Redux/cart/cartslice";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function SingleProduct() {
@@ -17,7 +22,7 @@ function SingleProduct() {
   // for checking this product is exist in cart or not
   const cartItem = Items.find((item) => item.id === Product.id);
   console.log(cartItem);
-  
+
   const handleAddToCart = (user) => {
     dispatch(addToCart(user));
     console.log(user);
@@ -31,8 +36,8 @@ function SingleProduct() {
       progress: undefined,
       theme: "light",
     });
-  }
-  
+  };
+
   if (!Product) {
     return <h1>item is found</h1>;
   }
@@ -42,12 +47,11 @@ function SingleProduct() {
         id="product-container"
         className="bg-secondary w-full flex mt-1 flex-col md:flex-row"
       >
-        <div id="product-image" className="w-full md:w-[45%] md:min-h-screen lg:h-[100vh]">
-          <img
-            src={Product.img}
-            alt="product_pic"
-            className="h-full w-full"
-          />
+        <div
+          id="product-image"
+          className="w-full md:w-[45%] md:min-h-screen lg:h-[100vh]"
+        >
+          <img src={Product.img} alt="product_pic" className="h-full w-full" />
         </div>
         <div
           id="product-content"
@@ -57,7 +61,9 @@ function SingleProduct() {
             <h1 className="text-3xl font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl ">
               ELON MUSK
             </h1>
-            <h5 className="my-3 md:my-4 lg:my-5">Painting, Drawing & Works on Paper</h5>
+            <h5 className="my-3 md:my-4 lg:my-5">
+              Painting, Drawing & Works on Paper
+            </h5>
             <p className="text-2xl my-3 underline italic font-bold">Classic</p>
             <p className="text-justify">
               Painter ELON MUSK’s work was recently featured in{" "}
@@ -68,12 +74,12 @@ function SingleProduct() {
               Heliopolis Gallery from 2012-2015.
             </p>
             <div className="flex gap-4 max-md:flex-col mt-6 md:mt-4 lg:mt-6">
-              <button
-                type="button"
+              <NavLink
+                to={"/checkout"}
                 className="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-primary_alt hover:bg-primary  text-white"
               >
                 Checkout
-              </button>
+              </NavLink>
             </div>
 
             <div className="flex gap-4 mt-6 items-center md:mt-4 lg:mt-6 md:mb-2">
@@ -81,8 +87,8 @@ function SingleProduct() {
                 <button
                   type="button"
                   className="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-primary_alt hover:bg-primary  text-white"
-                  onClick={()=> handleAddToCart(Product)}
-               >
+                  onClick={() => handleAddToCart(Product)}
+                >
                   Add Cart
                 </button>
               </div>
@@ -115,9 +121,8 @@ function SingleProduct() {
                   <button
                     type="button"
                     onClick={() => {
-                      dispatch(increaseQuantity({id: Product.id}));
+                      dispatch(increaseQuantity({ id: Product.id }));
                       console.log("increase");
-                      
                     }}
                   >
                     <svg

@@ -4,6 +4,7 @@ import Data from "../../../API/3Ddata";
 import Container from "../../../Components/Container";
 import { useDispatch ,useSelector} from "react-redux";
 import { increaseQuantity,decreaseQuantity,addToCart } from "../../../Redux/cart/cartslice";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function SingleProduct() {
@@ -61,12 +62,12 @@ function SingleProduct() {
               Heliopolis Gallery from 2012-2015.
             </p>
             <div className="flex gap-4 max-md:flex-col mt-6 md:mt-4 lg:mt-6">
-              <button
-                type="button"
+              <NavLink
+                to={"/checkout"}
                 className="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-primary_alt hover:bg-primary  text-white"
               >
                 Checkout
-              </button>
+              </NavLink>
             </div>
 
             <div className="flex gap-4 mt-6 items-center md:mt-4 lg:mt-6 md:mb-2">
