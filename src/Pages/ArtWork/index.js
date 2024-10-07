@@ -44,13 +44,14 @@ function ArtWork() {
                 key={product.id}
                 className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl lg:w-56 xlg:w-64 2xlg:w-72"
               >
-                < NavLink to={`/artwork-shop/${product.id}`}>
+                <NavLink to={`/artwork-shop/${product.id}`}>
                   <img
                     src={product.img}
                     alt="Product"
                     className="h-80 w-72 object-cover rounded-t-xl"
                   />
                 </NavLink>
+
                 <div
                   onClick={() => toggleFavorite(product.id)}
                   className="absolute top-2 right-2 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"

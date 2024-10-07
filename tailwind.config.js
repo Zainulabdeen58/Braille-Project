@@ -19,11 +19,13 @@ module.exports = {
            'xlg' : '1240px',
            '2xlg' : '1440px'        
       },
+    
       
     },
   },
   plugins: [
     require('daisyui'),
+    require('tailwind-scrollbar'), // Add the scrollbar plugin here
   ],
   daisyui: {
     themes: [
