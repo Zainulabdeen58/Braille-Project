@@ -1,10 +1,10 @@
 import React from "react";
 // import mdLogo from "../Assets/Image/logo_50.png"; // Larger logo for bigger screens
-import smLogo from "../Assets/Image/logo_30.png"; // Smaller logo for small screens
+import smLogo from "../../Assets/Image/logo_30.png"; // Smaller logo for small screens
 
-function Header() {
+function Home() {
   return (
-    <Header id="header" className="bg-primary w-full flex justify-center">
+    <Home id="header" className="bg-primary w-full flex justify-center">
       <picture>
         {/* Switch logo image based on screen size */}
         {/* <source media="(min-width: 768px)" srcSet={mdLogo} /> */}
@@ -14,8 +14,8 @@ function Header() {
           alt="Website logo"
         />
       </picture>
-    </Header>
+    </Home>
   );
 }
 
-export default Header;
+export default Home;

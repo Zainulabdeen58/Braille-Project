@@ -34,8 +34,9 @@ function ArtWork() {
     <>
       <Container>
         <section
+           
           id="Projects"
-          className="w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 "
+          className="w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 bg-black "
         >
           {/* Card Image Section */}
           {Data.map((product) => {
@@ -52,7 +53,10 @@ function ArtWork() {
                   />
                 </NavLink>
 
-                <div
+                <button
+                  aria-label={
+                    isFavorited[product.id] ? "Unfavorite" : "Favorite"
+                  }
                   onClick={() => toggleFavorite(product.id)}
                   className="absolute top-2 right-2 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
                 >
@@ -61,7 +65,7 @@ function ArtWork() {
                       isFavorited[product.id] ? "text-red-500" : "text-white"
                     }`}
                   />
-                </div>
+                </button>
                 {/* Card Content section */}
                 <div className="px-4 py-3 w-72 lg:w-56 xlg:w-64 2xlg:w-72">
                   <span className="text-gray-400 mr-3 uppercase text-xs">

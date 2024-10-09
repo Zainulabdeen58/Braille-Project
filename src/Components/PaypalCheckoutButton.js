@@ -60,7 +60,7 @@ function PaypalCheckoutButton(props) {
             const order = await actions.order.capture();
             console.log("Order capture", order);
 
-            // console.log("data.orderID", data.orderID);
+            console.log("data.orderID", data.orderID);
             handleApprove(data.orderID);  // Mark the product as approved
           }}
 
