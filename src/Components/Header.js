@@ -4,7 +4,7 @@ import smLogo from "../Assets/Image/logo_30.png"; // Smaller logo for small scre
 
 function Header() {
   return (
-    <Header id="header" className="bg-primary w-full flex justify-center">
+    <header id="header" className="bg-primary w-full flex justify-center">
       <picture>
         {/* Switch logo image based on screen size */}
         {/* <source media="(min-width: 768px)" srcSet={mdLogo} /> */}
@@ -14,7 +14,7 @@ function Header() {
           alt="Website logo"
         />
       </picture>
-    </Header>
+    </header>
   );
 }
 

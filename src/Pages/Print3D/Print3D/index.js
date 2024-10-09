@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaHeart } from "react-icons/fa";
 import { addToCart } from "../../../Redux/cart/cartslice";
 import Data from "../../../API/3Ddata";
 import { toast } from "react-toastify";
-import Container from "../../../Components/Container";
+
+const Container = lazy(()=> import("../../../Components/Container"));
 
 function Print3D() {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -32,6 +33,7 @@ function Print3D() {
   };
   return (
     <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Container>
         <section
           id="Projects"
@@ -49,6 +51,7 @@ function Print3D() {
                     src={product.img}
                     alt="Product"
                     className="h-80 w-72 object-cover rounded-t-xl"
+                    loading="lazy"
                   />
                 </NavLink>
                 <div
@@ -100,6 +103,8 @@ function Print3D() {
           })}
         </section>
       </Container>
+
+    </Suspense>
     </>
   );
 }

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/cart/cartslice";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
-import Container from "../../Components/Container";
+
+const Container = lazy(() => import("../../Components/Container"));
 
 function ArtWork() {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -32,11 +33,13 @@ function ArtWork() {
   };
   return (
     <>
+      <Suspense fallback={<div>Loading ...</div>}>
+
       <Container>
         <section
            
           id="Projects"
-          className="w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 bg-black "
+          className="w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8"
         >
           {/* Card Image Section */}
           {Data.map((product) => {
@@ -50,6 +53,7 @@ function ArtWork() {
                     src={product.img}
                     alt="Product"
                     className="h-80 w-72 object-cover rounded-t-xl"
+                    loading="lazy"
                   />
                 </NavLink>
 
@@ -105,6 +109,7 @@ function ArtWork() {
           })}
         </section>
       </Container>
+      </Suspense>
     </>
   );
 }
