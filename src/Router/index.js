@@ -12,7 +12,7 @@ import Checkout from "../Components/Checkout";
 const routers =createBrowserRouter([
     {
         path: "/",
-        element : "<div>Zain<div/>"
+        element : <Home/>
     },
     {
         path:"/about-us",
