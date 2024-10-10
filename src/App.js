@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import store from "../src/Redux/cart/store/store";  
+import store from "./Redux/store/store";  
 import { Provider } from "react-redux";  
 import { ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +14,7 @@ export default function App() {
       <PayPalScriptProvider options={{ "client-id": process.env.Client_ID }}>
         <Provider store={store}>
           <RouterProvider router={routers}>
-            
+
           </RouterProvider>
           <ToastContainer />
         </Provider>
