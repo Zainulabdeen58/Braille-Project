@@ -21,7 +21,8 @@ function ViewCart() {
     <div className="drawer-end fixed bottom-3 right-4 z-50 ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
-        {/* Page content here */}
+        {/* View Cart Button */}
+        <div>
         <label htmlFor="my-drawer-4" className="drawer-button">
           <div
             tabIndex={0}
@@ -36,8 +37,11 @@ function ViewCart() {
             </div>
           </div>
         </label>
+
+        </div>
       </div>
 
+      {/* Page content here */}
       <div className="drawer-side">
         <label
           htmlFor="my-drawer-4"
@@ -88,7 +92,7 @@ function ViewCart() {
                         <p className="text-xs font-semibold text-gray-500 mt-0.5">
                           {item.dimension}
                         </p>
-                               {/* Remove Button */}
+                        {/* Remove Button */}
                         <button
                           type="button"
                           className="mt-6 font-semibold text-red-500 text-xs flex items-center gap-1 shrink-0"
@@ -120,9 +124,8 @@ function ViewCart() {
                         ${parseFloat(item.price * item.quantity).toFixed(2)}
                       </h4>
 
-                     
                       <span className="mt-6 flex items-center px-3 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
-                         {/* Decrease Button */}
+                        {/* Decrease Button */}
                         <button
                           type="button"
                           onClick={() => {
@@ -187,6 +190,9 @@ function ViewCart() {
           </div>
         </div>
       </div>
+
+      {/*  */}
+     
     </div>
   );
 }

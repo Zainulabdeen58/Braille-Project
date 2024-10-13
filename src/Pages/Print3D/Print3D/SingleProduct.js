@@ -49,17 +49,12 @@ function SingleProduct() {
         >
           <div className="block mx-auto w-[80%] text-center md:w-[60%]">
             <h1 className="text-3xl font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl ">
-              ELON MUSK
+              Julie
             </h1>
             <h5 className="my-3 md:my-4 lg:my-5">Painting, Drawing & Works on Paper</h5>
             <p className="text-2xl my-3 underline italic font-bold">3D</p>
             <p className="text-justify">
-              Painter ELON MUSK’s work was recently featured in{" "}
-              <i> New American Paintings #146 </i> curated by New York
-              Magazine's Jerry Saltz. Additional features include Architectural
-              Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the
-              artist-run gallery Underdonk in New York, and co-curated at
-              Heliopolis Gallery from 2012-2015.
+              {Product.description}
             </p>
             <div className="flex gap-4 max-md:flex-col mt-6 md:mt-4 lg:mt-6">
               <NavLink

@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useDispatch } from "react-redux";
+import { speakText } from "../Redux/cart/accessibility";
 
 const navigation = [
   { name: 'About Us', className: 'nav-link' , to: "/about-us", current: false },
@@ -15,6 +17,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 function Navbar() {
+  const dispatch = useDispatch();
   
   return (
     <div>
@@ -48,17 +51,18 @@ function Navbar() {
         {/* Navbar Larger screen */}
         <div className="hidden sm:block">
           <div className="flex space-x-1 md:space-x-14 lg:space-x-16">
-            {navigation.map((item) => (
+            {navigation.map((nav) => (
               <NavLink
-                key={item.name}
-                to={item.to}
+                key={nav.name}
+                to={nav.to}
                 className={classNames(
-                  item.current ? 'bg-primary_alt text-secondary' : 'text-secondary hover:bg-primary_alt',
+                  nav.current ? 'bg-primary_alt text-secondary' : 'text-secondary hover:bg-primary_alt',
                   'rounded-md px-3 py-2 text-sm lg:text-xl font-medium',
                 )}
-                aria-current={item.current ? 'page' : undefined}
+                onMouseEnter={()=> dispatch(speakText(nav.name))}
+                aria-current={nav.current ? 'page' : undefined}
               >
-                {item.name}
+                {nav.name}
               </NavLink>
             ))}
           </div>

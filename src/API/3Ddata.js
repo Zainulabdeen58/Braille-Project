@@ -11,6 +11,9 @@ const data3D = [
     year: 2012,
     quantity: 1,
     img: Image.img28,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 2,
@@ -22,6 +25,9 @@ const data3D = [
     year: 2012,
     quantity: 1,
     img: Image.img22,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 3,
@@ -33,6 +39,9 @@ const data3D = [
     year: 2015,
     quantity: 1,
     img: Image.img13,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 4,
@@ -44,6 +53,9 @@ const data3D = [
     year: 2016,
     quantity: 1,
     img: Image.img19,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 5,
@@ -55,6 +67,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img25,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 6,
@@ -66,6 +81,9 @@ const data3D = [
     year: 2017,
     quantity: 1,
     img: Image.img26,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 7,
@@ -77,6 +95,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img27,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 8,
@@ -88,6 +109,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img28,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 9,
@@ -99,6 +123,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img10,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 10,
@@ -110,6 +137,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img12,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 11,
@@ -121,6 +151,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img11,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 12,
@@ -132,6 +165,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img15,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 13,
@@ -143,6 +179,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img17,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 14,
@@ -154,6 +193,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img16,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 15,
@@ -165,6 +207,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img1,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 16,
@@ -176,6 +221,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img2,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 17,
@@ -187,6 +235,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img1,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 18,
@@ -198,6 +249,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img8,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 19,
@@ -209,6 +263,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img9,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
   {
     id: 20,
@@ -220,6 +277,9 @@ const data3D = [
     year: 2019,
     quantity: 1,
     img: Image.img3,
+     description:
+      "Painter ELON MUSK’s work was recently featured in New American Paintings #146 curated by New York Magazine's Jerry Saltz. Additional features include Architectural Digest, ArtMaze, and Vice / Garage. Elrod is co-director of the artist-run gallery Underdonk in New York, and co-curated at Heliopolis Gallery from 2012-2015.",
+ 
   },
 ];
 

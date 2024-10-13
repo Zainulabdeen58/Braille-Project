@@ -8,8 +8,9 @@ import CartContents from "../Components/ReviewCart";
 import About from "../Pages/About/index"
 import Exhibition from "../Pages/Exhibition";
 import Checkout from "../Components/Checkout";
+// import ScreenReader from "../Components/ScreenReader";
 
-const routers =createBrowserRouter([
+const Routers =createBrowserRouter([
     {
         path: "/",
         element : <Home/>
@@ -53,4 +54,4 @@ const routers =createBrowserRouter([
 
 ]);
 
-export { routers};
+export { Routers};
