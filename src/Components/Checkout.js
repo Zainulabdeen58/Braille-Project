@@ -2,11 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Header from "./Header";
 import Navbar from "./Navbar";
+import Accessibility from "./Accessibility";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
-
+import { useDispatch } from "react-redux";
+import { speakText } from "../Redux/cart/accessibility";
 
 function Checkout() {
-  
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -20,17 +22,26 @@ function Checkout() {
     },
     quantity: item.quantity, // Quantity of the product
   }));
+  const handleSpeak = (text) => {
+    dispatch(speakText(text));
+  };
 
   return (
     <div>
       <Header />
       <Navbar />
+      <Accessibility />
       <div className="font-[sans-serif] text-black font-semibold">
         <div className="flex max-sm:flex-col h-full">
           {/* Form Section in checkout */}
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
             <div className="flex gap-1 flex-col items-center space-y-2 mb-2">
-              <span className={` text-sm  text-[#575d70]  `}>Express checkout</span>
+              <span
+                className={` text-sm  text-[#575d70] `}
+                onMouseEnter={() => handleSpeak("Express checkout")}
+              >
+                Express checkout
+              </span>
               <div className="py-2 px-4 flex items-center justify-center mb-4 w-full">
                 <div className="w-[100%]">
                   <PaypalCheckoutButton
@@ -50,17 +61,28 @@ function Checkout() {
 
               <div className="flex items-center w-full mt-2">
                 <hr className="flex-grow border-gray-300" />
-                <span className="text-gray-500 mx-2">OR</span>
+                <span
+                  className="text-gray-500 mx-2"
+                  onMouseEnter={() => handleSpeak("OR")}
+                >
+                  OR
+                </span>
                 <hr className="flex-grow border-gray-300" />
               </div>
             </div>
 
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">
+            <h2
+              className="text-2xl lg:text-3xl font-bold text-gray-800"
+              onMouseEnter={() => handleSpeak("Complete your order")}
+            >
               Complete your order
             </h2>
             <form className="mt-8">
               <div>
-                <h3 className="text-base lg:text-lg font-bold text-gray-800 mb-4">
+                <h3
+                  className="text-base lg:text-lg font-bold text-gray-800 mb-4"
+                  onMouseEnter={() => handleSpeak("Personal Details")}
+                >
                   Personal Details
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -68,7 +90,8 @@ function Checkout() {
                     <input
                       type="text"
                       placeholder="First Name"
-                      className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md"
+                      onMouseEnter={() => handleSpeak("First Name")}
                     />
                   </div>
 
@@ -77,6 +100,7 @@ function Checkout() {
                       type="text"
                       placeholder="Last Name"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("Last Name")}
                     />
                   </div>
 
@@ -85,21 +109,26 @@ function Checkout() {
                       type="email"
                       placeholder="Email"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("Email")}
                     />
                   </div>
 
                   <div>
                     <input
                       type="number"
-                      placeholder="Phone No."
+                      placeholder="Phone No"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("Phone No")}
                     />
                   </div>
                 </div>
               </div>
 
               <div className="mt-8">
-                <h3 className="text-base lg:text-lg font-bold text-gray-800 mb-4">
+                <h3
+                  className="text-base lg:text-lg font-bold text-gray-800 mb-4"
+                  onMouseEnter={() => handleSpeak("Shipping Address")}
+                >
                   Shipping Address
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -108,6 +137,7 @@ function Checkout() {
                       type="text"
                       placeholder="Address Line"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("Address Line")}
                     />
                   </div>
                   <div>
@@ -115,6 +145,7 @@ function Checkout() {
                       type="text"
                       placeholder="City"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("City")}
                     />
                   </div>
                   <div>
@@ -122,6 +153,7 @@ function Checkout() {
                       type="text"
                       placeholder="State"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("State")}
                     />
                   </div>
                   <div>
@@ -129,15 +161,16 @@ function Checkout() {
                       type="text"
                       placeholder="Zip Code"
                       className="px-4 py-3 text-sm lg:text-base bg-gray-100 focus:bg-transparent text-gray-800 w-full rounded-md "
+                      onMouseEnter={() => handleSpeak("Zip Code")}
                     />
                   </div>
                 </div>
 
                 <div className="flex gap-4 max-md:flex-col mt-8">
                   <button
-                 
                     type="button"
                     className="rounded-md px-6 py-3 w-full text-sm lg:text-base tracking-wide bg-primary_alt hover:bg-primary  text-white"
+                    onMouseEnter={() => handleSpeak("Pay Now")}
                   >
                     Pay Now
                   </button>
@@ -163,25 +196,55 @@ function Checkout() {
                         </div>
 
                         <div className="w-full">
-                          <h3 className="text-base lg:text-lg">{item.artist}</h3>
-                          <ul className={ `text-xs lg:text-sm space-y-2 mt-2 text-gray-600   `}>
+                          <h3 className="text-base lg:text-lg" onMouseEnter={() => handleSpeak(item.artist)} >
+                            {item.artist}
+                          </h3>
+                          <ul
+                            className={`text-xs lg:text-sm space-y-2 mt-2 text-gray-600   `}
+                          >
                             <li className="flex">
-                              Dimension{" "}
-                              <span className="ml-auto">{item.dimension}</span>
+                              <span
+                                onMouseEnter={() => handleSpeak("Dimension")}
+                              >
+                                Dimension{" "}
+                              </span>
+                              <span
+                                className="ml-auto"
+                                onMouseEnter={() => handleSpeak(item.dimension)}
+                              >
+                                {item.dimension}
+                              </span>
                             </li>
+
                             <li className="flex">
-                              Quantity{" "}
-                              <span className="ml-auto">{item.quantity}</span>
+                              <span
+                                onMouseEnter={() => handleSpeak("Quantity")}
+                              >
+                                
+                                Quantity{" "}
+                              </span>
+                              <span
+                                className="ml-auto"
+                                onMouseEnter={() => handleSpeak(item.quantity)}
+                              >
+                                {item.quantity}
+                              </span>
                             </li>
+
                             <li className="flex">
-                              Total Price{" "}
-                              <span className="ml-auto">
+                              <span
+                                onMouseEnter={() => handleSpeak("Total Price")}
+                              >
+                                Total Price{" "}
+                              </span>
+                              <span className="ml-auto" onMouseEnter={() => handleSpeak(`$ ${item.price * item.quantity}`)}>
                                 $
                                 {parseFloat(item.price * item.quantity).toFixed(
                                   2
                                 )}
                               </span>
                             </li>
+
                           </ul>
                         </div>
                       </div>
@@ -197,32 +260,52 @@ function Checkout() {
                     <input
                       className="w-full outline-gray-300 focus:outline-gray-500 rounded-md h-11 p-3 md:h-10 md:p-2 lg:h-11 lg:p-3 font-thin"
                       placeholder="Gift Card, Redemption or Discount Code"
+                      onMouseEnter={() =>
+                        handleSpeak("Gift Card, Redemption or Discount Code")
+                      }
                     />
                   </div>
                   <button
                     type="button"
-                    className={`btn  px-4 rounded-3xl border border-gray-300  : 'bg-[#d9d9d9ef] text-[#50535de1]' }  lg:px-7 text-[0.93rem]` }
+                    className={`btn  px-4 rounded-3xl border border-gray-300  : 'bg-[#d9d9d9ef] text-[#50535de1]' }  lg:px-7 text-[0.93rem]`}
+                    onMouseEnter={() => handleSpeak("APPLY")}
                   >
                     APPLY
                   </button>
                 </div>
 
                 {/* For Subtotal */}
-                <div className={ `flex justify-between mt-2 text-primary_alt font-thin text-[0.88rem] lg:text-sm `}>
-                  <span>Subtotal {items.length} Items</span>
-                  <span >${parseFloat(subTotal).toFixed(2)}</span>
+                <div
+                  className={`flex justify-between mt-2 text-primary_alt font-thin text-[0.88rem] lg:text-sm `}
+                >
+                  <span onMouseEnter={() => handleSpeak("Subtotal Items")}>
+                    Subtotal {items.length} Items
+                  </span>
+                  <span onMouseEnter={() => handleSpeak(`$ ${subTotal}`)}>
+                    ${parseFloat(subTotal).toFixed(2)}
+                  </span>
                 </div>
 
                 {/* For Shipping */}
                 <div className="flex justify-between mt-2 font-thin text-[14px] lg:text-sm">
-                  <span className={`text-primary_alt  ` }>Shipping</span>
-                  <span className={`text-gray-600 `}>Enter shipping address</span>
+                  <span
+                    className={`text-primary_alt  `}
+                    onMouseEnter={() => handleSpeak("Shipping")}
+                  >
+                    Shipping
+                  </span>
+                  <span
+                    className={`text-gray-600 `}
+                    onMouseEnter={() => handleSpeak("Enter shipping address")}
+                  >
+                    Enter shipping address
+                  </span>
                 </div>
 
                 {/* For Total */}
                 <div className="flex justify-between mt-2 text-base lg:text-lg text-primary_alt">
-                  Total{" "}
-                  <span>
+                  <span onMouseEnter={() => handleSpeak("Total")}>Total</span>
+                  <span onMouseEnter={() => handleSpeak(`$ ${subTotal}`)}>
                     USD ${parseFloat(subTotal).toFixed(2)}
                   </span>
                 </div>
