@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
-import store from "./Redux/store/store";  
-import { Provider } from "react-redux";  
+import store from "./Redux/cart/store/store";  
+import { Provider } from "react-redux"; 
 import { ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";

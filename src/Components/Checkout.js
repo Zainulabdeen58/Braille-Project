@@ -1,13 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleHighContrast } from "../Redux/highcontrast/highcontrastSlice";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
 
 
 function Checkout() {
-  const isHighContrast = useSelector((state)=> state.highcontrast.isHighContrast)
+  // conshighcontrash();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
@@ -32,7 +31,7 @@ function Checkout() {
           {/* Form Section in checkout */}
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
             <div className="flex gap-1 flex-col items-center space-y-2 mb-2">
-              <span className={` text-sm  text-[#575d70]  ${isHighContrast? 'font-bold' : 'font-normal' } `}>Express checkout</span>
+              <span className={` text-sm  text-[#575d70]  `}>Express checkout</span>
               <div className="py-2 px-4 flex items-center justify-center mb-4 w-full">
                 <div className="w-[100%]">
                   <PaypalCheckoutButton
@@ -137,7 +136,7 @@ function Checkout() {
 
                 <div className="flex gap-4 max-md:flex-col mt-8">
                   <button
-                  onClick={()=> dispatch(toggleHighContrast())}
+                 
                     type="button"
                     className="rounded-md px-6 py-3 w-full text-sm lg:text-base tracking-wide bg-primary_alt hover:bg-primary  text-white"
                   >
@@ -166,7 +165,7 @@ function Checkout() {
 
                         <div className="w-full">
                           <h3 className="text-base lg:text-lg">{item.artist}</h3>
-                          <ul className={ `text-xs lg:text-sm space-y-2 mt-2 text-gray-600  ${isHighContrast? 'font-bold' : 'font-normal' } `}>
+                          <ul className={ `text-xs lg:text-sm space-y-2 mt-2 text-gray-600   `}>
                             <li className="flex">
                               Dimension{" "}
                               <span className="ml-auto">{item.dimension}</span>
@@ -203,22 +202,22 @@ function Checkout() {
                   </div>
                   <button
                     type="button"
-                    className={`btn  px-4 rounded-3xl border border-gray-300 ${isHighContrast? 'bg-[#D9D9D9] text-[#3d4152]' : 'bg-[#d9d9d9ef] text-[#50535de1]' }  lg:px-7 text-[0.93rem]` }
+                    className={`btn  px-4 rounded-3xl border border-gray-300  : 'bg-[#d9d9d9ef] text-[#50535de1]' }  lg:px-7 text-[0.93rem]` }
                   >
                     APPLY
                   </button>
                 </div>
 
                 {/* For Subtotal */}
-                <div className={ `flex justify-between mt-2 text-primary_alt font-thin text-[0.88rem] lg:text-sm ${isHighContrast? 'font-bold' : 'font-normal' }`}>
+                <div className={ `flex justify-between mt-2 text-primary_alt font-thin text-[0.88rem] lg:text-sm `}>
                   <span>Subtotal {items.length} Items</span>
                   <span >${parseFloat(subTotal).toFixed(2)}</span>
                 </div>
 
                 {/* For Shipping */}
                 <div className="flex justify-between mt-2 font-thin text-[14px] lg:text-sm">
-                  <span className={`text-primary_alt ${isHighContrast? 'font-bold' : 'font-normal' } ` }>Shipping</span>
-                  <span className={`text-gray-600 ${isHighContrast? 'font-bold' : 'font-normal' }`}>Enter shipping address</span>
+                  <span className={`text-primary_alt  ` }>Shipping</span>
+                  <span className={`text-gray-600 `}>Enter shipping address</span>
                 </div>
 
                 {/* For Total */}

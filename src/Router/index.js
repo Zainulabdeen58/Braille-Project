@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Pages/Home";
+import Home from "../Pages/Home/index";
 import ArtShop from "../Pages/ArtWork/index";
 import SingleProduct from "../Pages/ArtWork/SingleProduct";
 import Print3D from "../Pages/Print3D/Print3D/index";
