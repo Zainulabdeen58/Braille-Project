@@ -1,13 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
 
 
 function Checkout() {
-  // conshighcontrash();
-  const dispatch = useDispatch();
+  
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
