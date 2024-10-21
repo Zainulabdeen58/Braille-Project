@@ -1,22 +1,28 @@
 import React, { lazy, Suspense, useState } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../Redux/cart/cartslice";
+import { useDispatch , useSelector} from "react-redux";
+import { addToCart } from "../../Redux/cartslice";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { speakText } from "../../Redux/accessibility/index";
+
 
 const Container = lazy(() => import("../../Components/Container"));
 
 function ArtWork() {
+  const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const [isFavorited, setIsFavorited] = useState(false);
+  const dispatch = useDispatch();
+
   const toggleFavorite = (id) => {
     setIsFavorited((prevState) => ({
       ...prevState,
       [id]: !prevState[id], // Toggle the state for the clicked item
     }));
   };
-  const dispatch = useDispatch();
+
+  
   const handleAddToCart = (user) => {
     dispatch(addToCart(user));
     console.log(user);
@@ -31,15 +37,20 @@ function ArtWork() {
       theme: "light",
     });
   };
+ 
+  const handleSpeak =(text)=>{
+    dispatch(speakText(text))
+  }
   return (
     <>
       <Suspense fallback={<div>Loading ...</div>}>
 
       <Container>
+        
         <section
            
           id="Projects"
-          className="w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8"
+          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 ${isHighContrast? "font-bold text-black" : "text-gray-400"}`}
         >
           {/* Card Image Section */}
           {Data.map((product) => {
@@ -48,6 +59,8 @@ function ArtWork() {
                 key={product.id}
                 className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl lg:w-56 xlg:w-64 2xlg:w-72"
               >
+                {/* Card Image */}
+
                 <NavLink to={`/artwork-shop/${product.id}`}>
                   <img
                     src={product.img}
@@ -57,6 +70,7 @@ function ArtWork() {
                   />
                 </NavLink>
 
+                 {/* Favourite Button */}
                 <button
                   aria-label={
                     isFavorited[product.id] ? "Unfavorite" : "Favorite"
@@ -70,18 +84,19 @@ function ArtWork() {
                     }`}
                   />
                 </button>
+
                 {/* Card Content section */}
                 <div className="px-4 py-3 w-72 lg:w-56 xlg:w-64 2xlg:w-72">
-                  <span className="text-gray-400 mr-3 uppercase text-xs">
+                  <span className=" mr-3 uppercase text-xs" onMouseEnter={()=> handleSpeak(product.dimension)}>
                     {product.dimension}
                   </span>
-                  <p className="text-lg font-bold text-black truncate block capitalize">
+                  <span className="text-lg font-bold text-black truncate block capitalize" onMouseEnter={()=> handleSpeak(product.artist)}>
                     {product.artist}
-                  </p>
+                  </span>
                   <div className="flex items-center">
-                    <p className="text-lg font-semibold text-black cursor-auto my-3">
+                    <span className="text-lg font-semibold text-black cursor-auto my-3" onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
                       ${product.price}
-                    </p>
+                    </span>
                     {/* Icon Add to Cart */}
                     <div className="ml-auto">
                       <svg

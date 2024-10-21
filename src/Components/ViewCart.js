@@ -4,28 +4,99 @@ import {
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
-} from "../Redux/cart/cartslice/index";
+} from "../Redux/cartslice/index";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { BiSolidShoppingBags  } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { speakText } from "../Redux/accessibility";
 
 function ViewCart() {
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items); // Adjust according to your state structure
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
-  const dispatch = useDispatch();
+  const handleSpeak = (text) => {
+    dispatch(speakText(text));
+  };
 
+  if (items.length === 0) {
+    return (
+      <div className="drawer-end fixed bottom-3 right-4 z-50 ">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content ">
+          {/* View Cart Button */}
+          <label htmlFor="my-drawer-4" className="drawer-button">
+            <div
+              role="button"
+              className="btn bg-primary_alt hover:bg-primary pt-1 ml-2 mt-2"
+            >
+              <div className="indicator">
+                <MdOutlineShoppingBag className="text-3xl text-secondary" />
+              </div>
+            </div>
+          </label>
+        </div>
+
+        {/* Page content here */}
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+
+          <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-screen z-[1001]">
+            <div className="overflow-auto pt-6 px-6 h-full ">
+              <div className="flex items-center gap-4 text-gray-800">
+                <h3
+                  className="text-2xl font-bold flex-1"
+                  onMouseEnter={() => handleSpeak("Shopping Cart")}
+                >
+                  Shopping cart
+                </h3>
+                <label htmlFor="my-drawer-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-3.5 ml-2 cursor-pointer shrink-0 fill-black hover:fill-red-500"
+                    viewBox="0 0 320.591 320.591"
+                  >
+                    <path
+                      d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                      data-original="#000000"
+                    ></path>
+                    <path
+                      d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                      data-original="#000000"
+                    ></path>
+                  </svg>
+                </label>
+              </div>
+              <div className="flex flex-col justify-center items-center h-[90%]">
+              <BiSolidShoppingBags  className="text-9xl"/>
+              <h1 className="font-bold mt-3 text-2xl" >Cart Is Empty</h1>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/*  */}
+      </div>
+    );
+  }
+
+  
   return (
     <div className="drawer-end fixed bottom-3 right-4 z-50 ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
         {/* View Cart Button */}
-        <div>
+
         <label htmlFor="my-drawer-4" className="drawer-button">
           <div
-            tabIndex={0}
             role="button"
             className="btn bg-primary_alt hover:bg-primary pt-1 ml-2 mt-2"
           >
@@ -37,8 +108,6 @@ function ViewCart() {
             </div>
           </div>
         </label>
-
-        </div>
       </div>
 
       {/* Page content here */}
@@ -48,10 +117,18 @@ function ViewCart() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
+
+        {/****** <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"}`}> */}
+
         <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-screen z-[1001]">
           <div className="overflow-auto p-6 h-[calc(100vh-135px)]">
             <div className="flex items-center gap-4 text-gray-800">
-              <h3 className="text-2xl font-bold flex-1">Shopping cart</h3>
+              <h3
+                className="text-2xl font-bold flex-1"
+                onMouseEnter={() => handleSpeak("Shopping Cart")}
+              >
+                Shopping cart
+              </h3>
               <label htmlFor="my-drawer-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -86,10 +163,16 @@ function ViewCart() {
                       </div>
 
                       <div className="flex flex-col">
-                        <h3 className="text-base max-sm:text-sm font-bold text-gray-800">
+                        <h3
+                          className="text-base max-sm:text-sm font-bold text-gray-800"
+                          onMouseEnter={() => handleSpeak(item.artist)}
+                        >
                           {item.artist}
                         </h3>
-                        <p className="text-xs font-semibold text-gray-500 mt-0.5">
+                        <p
+                          className="text-xs font-semibold text-gray-500 mt-0.5"
+                          onMouseEnter={() => handleSpeak(item.dimension)}
+                        >
                           {item.dimension}
                         </p>
                         {/* Remove Button */}
@@ -99,6 +182,7 @@ function ViewCart() {
                           onClick={() => {
                             dispatch(removeFromCart({ id: item.id }));
                           }}
+                          onMouseEnter={() => handleSpeak("remove")}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +204,12 @@ function ViewCart() {
                     </div>
 
                     <div className="ml-auto">
-                      <h4 className="text-lg max-sm:text-base font-bold text-gray-800">
+                      <h4
+                        className="text-lg max-sm:text-base font-bold text-gray-800"
+                        onMouseEnter={() =>
+                          handleSpeak(`$ ${item.price * item.quantity}`)
+                        }
+                      >
                         ${parseFloat(item.price * item.quantity).toFixed(2)}
                       </h4>
 
@@ -144,7 +233,13 @@ function ViewCart() {
                           </svg>
                         </button>
 
-                        <span className="mx-3 font-bold">{item.quantity}</span>
+                        <span
+                          className="mx-3 font-bold"
+                          onMouseEnter={() => handleSpeak(item.quantity)}
+                        >
+                          {item.quantity}
+                        </span>
+                        {/* Increase Button */}
                         <button
                           type="button"
                           onClick={() => {
@@ -169,12 +264,17 @@ function ViewCart() {
               );
             })}
           </div>
-
+          {/* className={`px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9 ${isHighContrast? "font-bold" : "font-normal"}`} */}
           <div className="p-6 absolute bottom-0 w-full border-t bg-white">
             <ul className="text-gray-800 divide-y">
               <li className="flex flex-wrap gap-4 text-lg font-bold">
-                Subtotal{" "}
-                <span className="ml-auto">
+                <span onMouseEnter={() => handleSpeak("Subtotal")}>
+                  Subtotal
+                </span>
+                <span
+                  className="ml-auto"
+                  onMouseEnter={() => handleSpeak(`$ ${totalPrice}`)}
+                >
                   ${parseFloat(totalPrice).toFixed(2)}
                 </span>
               </li>
@@ -183,6 +283,7 @@ function ViewCart() {
               <button
                 type="button"
                 className="mt-6 text-sm font-semibold px-6 py-3 w-full bg-primary_alt hover:bg-primary  text-white rounded-md tracking-wide"
+                onMouseEnter={() => handleSpeak("Checkout")}
               >
                 Checkout
               </button>
@@ -192,7 +293,6 @@ function ViewCart() {
       </div>
 
       {/*  */}
-     
     </div>
   );
 }

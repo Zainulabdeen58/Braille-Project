@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Data from "../../../API/3Ddata";
-import Container from "../../../Components/Container";
+import Data from "../../API/3Ddata";
+import Container from "../../Components/Container";
 import { useDispatch ,useSelector} from "react-redux";
-import { increaseQuantity,decreaseQuantity,addToCart } from "../../../Redux/cart/cartslice";
+import { increaseQuantity,decreaseQuantity,addToCart } from "../../Redux/cartslice";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 

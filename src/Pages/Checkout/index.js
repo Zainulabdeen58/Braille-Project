@@ -1,14 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Header from "./Header";
-import Navbar from "./Navbar";
-import Accessibility from "./Accessibility";
-import PaypalCheckoutButton from "./PaypalCheckoutButton";
+import Header from "../../Components/Header";
+import Navbar from "../../Components/Navbar";
+import Accessibility from "../../Components/Accessibility";
+import PaypalCheckoutButton from "../../Components/PaypalCheckoutButton";
 import { useDispatch } from "react-redux";
-import { speakText } from "../Redux/cart/accessibility";
+import { speakText } from "../../Redux/accessibility/index";
 
 function Checkout() {
+  
+
   const dispatch = useDispatch();
+  const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -31,13 +34,14 @@ function Checkout() {
       <Header />
       <Navbar />
       <Accessibility />
+      
       <div className="font-[sans-serif] text-black font-semibold">
         <div className="flex max-sm:flex-col h-full">
           {/* Form Section in checkout */}
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
             <div className="flex gap-1 flex-col items-center space-y-2 mb-2">
               <span
-                className={` text-sm  text-[#575d70] `}
+                className={`text-md ${isHighContrast ? "text-black ":  "text-[#575d70]" }`}
                 onMouseEnter={() => handleSpeak("Express checkout")}
               >
                 Express checkout
@@ -180,7 +184,7 @@ function Checkout() {
           </div>
 
           {/* Product Section in checkout */}
-          <div className="bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%]">
+          <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"}`}>
             <div className="relative h-full">
               <div className="px-5 py-6  sm:overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 sm:h-[calc(100vh-60px)]  md:px-7 md:pr-9 md:pb-28">
                 <div className="space-y-4">
@@ -253,7 +257,7 @@ function Checkout() {
                 </div>
               </div>
 
-              <div className="px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9">
+              <div className={`px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9 ${isHighContrast? "font-bold" : "font-normal"}`}>
                 {/* For Coupon */}
                 <div className="flex justify-between items-center gap-5 md:gap-4">
                   <div className="flex-1">
@@ -267,7 +271,7 @@ function Checkout() {
                   </div>
                   <button
                     type="button"
-                    className={`btn  px-4 rounded-3xl border border-gray-300  : 'bg-[#d9d9d9ef] text-[#50535de1]' }  lg:px-7 text-[0.93rem]`}
+                    className={`btn  px-4 rounded-3xl border border-gray-300 ${isHighContrast ?  "" : "bg-[#d9d9d9ef] text-[#50535de1]" }  lg:px-7 text-[0.93rem]`}
                     onMouseEnter={() => handleSpeak("APPLY")}
                   >
                     APPLY
@@ -276,7 +280,7 @@ function Checkout() {
 
                 {/* For Subtotal */}
                 <div
-                  className={`flex justify-between mt-2 text-primary_alt font-thin text-[0.88rem] lg:text-sm `}
+                  className="flex justify-between mt-2 text-primary_alt text-[0.88rem] lg:text-sm"
                 >
                   <span onMouseEnter={() => handleSpeak("Subtotal Items")}>
                     Subtotal {items.length} Items
@@ -287,7 +291,7 @@ function Checkout() {
                 </div>
 
                 {/* For Shipping */}
-                <div className="flex justify-between mt-2 font-thin text-[14px] lg:text-sm">
+                <div className="flex justify-between mt-2 text-[14px] lg:text-sm">
                   <span
                     className={`text-primary_alt  `}
                     onMouseEnter={() => handleSpeak("Shipping")}
@@ -319,3 +323,7 @@ function Checkout() {
 }
 
 export default Checkout;
+
+
+
+

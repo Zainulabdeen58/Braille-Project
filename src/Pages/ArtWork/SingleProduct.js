@@ -7,11 +7,11 @@ import {
   increaseQuantity,
   decreaseQuantity,
   addToCart,
-} from "../../Redux/cart/cartslice";
+} from "../../Redux/cartslice/index";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { speakText } from "../../Redux/cart/accessibility";
+import { speakText } from "../../Redux/accessibility";
 
 function SingleProduct() {
   const dispatch = useDispatch();

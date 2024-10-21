@@ -2,18 +2,22 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/index";
 import ArtShop from "../Pages/ArtWork/index";
 import SingleProduct from "../Pages/ArtWork/SingleProduct";
-import Print3D from "../Pages/Print3D/Print3D/index";
-import Print3DSingleProduct from "../Pages/Print3D/Print3D/SingleProduct"
+import Print3D from "../Pages/Print3D/index";
+import Print3DSingleProduct from "../Pages/Print3D/SingleProduct"
 import CartContents from "../Components/ReviewCart";
 import About from "../Pages/About/index"
 import Exhibition from "../Pages/Exhibition";
-import Checkout from "../Components/Checkout";
-// import ScreenReader from "../Components/ScreenReader";
+import Checkout from "../Pages/Checkout";
+import ScreenReader from "../Components/ScreenTest";
 
 const Routers =createBrowserRouter([
     {
         path: "/",
         element : <Home/>
+    },
+    {
+        path: "/screen",
+        element : <ScreenReader/>
     },
     {
         path:"/about-us",

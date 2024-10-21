@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  removeFromCart,
-  increaseQuantity,
-  decreaseQuantity,
-} from "../Redux/cart/cartslice/index";
+import { removeFromCart, increaseQuantity, decreaseQuantity} from "../Redux/cartslice/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -123,6 +119,7 @@ const CartContents = () => {
                           </button>
                         </div>
                       </td>
+                      
                       {/* Total Price */}
                       <td className="p-4">
                         <h4 className="text-base font-bold text-gray-800">
