@@ -1,12 +1,13 @@
 // import React from "react";
 // import { useControls } from "react-zoom-pan-pinch";
 
-// const Controls = ({ zoomIn, zoomOut, resetTransform }) => {
+// const Controls = () => {
+//     const { zoomIn, zoomOut} = useControls();
 //   return (
-//     <div className="tools">
+//     <div className="w-full">
 //       <button onClick={zoomIn}>+</button>
 //       <button onClick={zoomOut}>-</button>
-//       <button onClick={resetTransform}>x</button>
+//       {/* <button onClick={resetTransform}>x</button> */}
 //     </div>
 //   );
 // };

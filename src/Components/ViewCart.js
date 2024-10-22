@@ -41,14 +41,14 @@ function ViewCart() {
         </div>
 
         {/* Page content here */}
-        <div className="drawer-side">
+        <div className="drawer-side h-[100%]">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
 
-          <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-screen z-[1001]">
+          <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-[100%]  z-[1001]">
             <div className="overflow-auto pt-6 px-6 h-full ">
               <div className="flex items-center gap-4 text-gray-800">
                 <h3
@@ -90,7 +90,7 @@ function ViewCart() {
 
   
   return (
-    <div className="drawer-end fixed bottom-3 right-4 z-50 ">
+    <div className="drawer-end fixed bottom-3 right-4 z-[110] ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
         {/* View Cart Button */}
@@ -111,7 +111,7 @@ function ViewCart() {
       </div>
 
       {/* Page content here */}
-      <div className="drawer-side">
+      <div className="drawer-side h-[100%]">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"
@@ -120,7 +120,7 @@ function ViewCart() {
 
         {/****** <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"}`}> */}
 
-        <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-screen z-[1001]">
+        <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-full z-[1001]">
           <div className="overflow-auto p-6 h-[calc(100vh-135px)]">
             <div className="flex items-center gap-4 text-gray-800">
               <h3

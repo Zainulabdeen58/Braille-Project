@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MdAccessibility } from "react-icons/md";
 import {
@@ -6,20 +6,20 @@ import {
   stopSpeech,
   toggleHighContrast,
 } from "../Redux/accessibility/index";
+import { zoomIn , zoomOut } from "../Redux/accessibility/index";
 
 function Accessibility() {
   const dispatch = useDispatch();
 
-  const isSpeechEnabled = useSelector(
-    (state) => state.accessibility.isSpeechEnabled
-  );
+  const isSpeechEnabled = useSelector((state) => state.accessibility.isSpeechEnabled);
 
-  const isHighContrast = useSelector(
-    (state) => state.accessibility.isHighContrast
-  );
+  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
+
+  const zoomLevel = useSelector((state)=> state.accessibility.zoomLevel);
+
+
   const handleSpeak = () => {
     dispatch(toggleSpeak());
-
     // If speech is enabled, stop any current speech
     if (isSpeechEnabled) {
       dispatch(stopSpeech());
@@ -30,21 +30,23 @@ function Accessibility() {
     dispatch(toggleHighContrast());
   };
 
-  const [zoomLevel, setZoomLevel] = useState(1); // Initial zoom level set to 100%
-
-  const zoomIn = () => {
-    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 1.4)); // Max zoom: 140%
+  const handleZoomIn = ()=> {
+    dispatch(zoomIn());
   };
 
-  const zoomOut = () => {
-    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 0.8)); // Min zoom: 50%
+  const handleZoomOut = ()=> {
+    dispatch(zoomOut());
   };
+  
+  useEffect(()=> {
+    document.body.style.zoom = zoomLevel;
+    // document.body.style.transform = `scale(${zoomLevel})`;
+    // document.body.style.transformOrigin = "0 0";  // Ensures scaling starts from the top-left corner
 
-  // Update the zoom level of the body
-  document.body.style.zoom = zoomLevel;
+  }, [zoomLevel]);
 
   return (
-    <div className="fixed bottom-3 left-3 z-20">
+    <div className="fixed bottom-3 left-3 z-[101]">
       {/* Accessibility Button */}
       <div className="dropdown dropdown-top">
         <div
@@ -56,7 +58,7 @@ function Accessibility() {
         </div>
         <div
           tabindex="0"
-          className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow"
+          className="card card-compact dropdown-content bg-base-100  mt-3 w-52 shadow"
         >
           <div className="card-body">
             <div className="card-actions">
@@ -91,13 +93,13 @@ function Accessibility() {
                 </span>
               </label>
 
-              {/* ***************************** */}
+              {/* Zoom Buttons */}
 
               <div style={{ textAlign: "center", margin: "20px" }}>
-                <button onClick={zoomIn} style={{ marginRight: "10px" }}>
+                <button onClick={handleZoomIn} style={{ marginRight: "10px" }}>
                   Zoom In
                 </button>
-                <button onClick={zoomOut}>Zoom Out</button>
+                <button onClick={handleZoomOut}>Zoom Out</button>
               </div>
             </div>
           </div>

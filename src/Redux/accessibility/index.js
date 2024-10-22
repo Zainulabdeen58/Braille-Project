@@ -3,13 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const accessibilitySlice = createSlice({
   name: "Accessibility",
   initialState: {
-    isSpeechEnabled: false,
-    isHighContrast : false,
+    isSpeechEnabled: localStorage.getItem("Voice") || false,
+    isHighContrast : localStorage.getItem("HighContrast") || false,
+    zoomLevel : localStorage.getItem("Zoom") || 1,
   },
 
   reducers: {
     toggleSpeak: (state) => {
       state.isSpeechEnabled = !state.isSpeechEnabled;
+      localStorage.setItem("Voice", state.isSpeechEnabled);
     },
 
     speakText: (state, actions) => {
@@ -34,9 +36,23 @@ const accessibilitySlice = createSlice({
 
     toggleHighContrast: (state)=>{
       state.isHighContrast = !state.isHighContrast;
+      localStorage.setItem("HighContrast" , state.isHighContrast);
+    },
+
+    // Zoom IN And OUT
+
+    zoomIn : (state)=>{
+      state.zoomLevel = Math.min(state.zoomLevel + 0.1, 1.2); // Max zoom: 120%
+      localStorage.setItem("Zoom" , state.zoomLevel);
+    },
+
+    zoomOut : (state) => {
+      state.zoomLevel = Math.max(state.zoomLevel - 0.1, 1); // Max zoom: 80%
+      localStorage.setItem("Zoom" , state.zoomLevel);
+
     }
   },
 });
 
-export const { toggleSpeak, speakText, stopSpeech ,toggleHighContrast } =  accessibilitySlice.actions;
+export const { toggleSpeak, speakText, stopSpeech ,toggleHighContrast, zoomIn , zoomOut } =  accessibilitySlice.actions;
 export default accessibilitySlice.reducer;

@@ -43,15 +43,15 @@ export default function App() {
 //     <React.StrictMode>
 //       <PayPalScriptProvider options={{ "client-id": process.env.Client_ID }}>
 //         <Provider store={store}>
-//           <TransformWrapper initialScale={1} initialPositionX={0} initialPositionY={0}>
-//             {({ zoomIn, zoomOut, resetTransform }) => (
+//           <TransformWrapper initialScale={1} initialPositionX={100} initialPositionY={100}>
+            
 //               <>
-//                 <Controls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+//                 <Controls />
 //                 <TransformComponent>
 //                   <RouterProvider router={Routers} />
 //                 </TransformComponent>
 //               </>
-//             )}
+          
 //           </TransformWrapper>
 //           <ToastContainer />
 //         </Provider>
