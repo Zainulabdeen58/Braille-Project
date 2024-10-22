@@ -61,7 +61,7 @@ function PaypalCheckoutButton(props) {
             console.log("Order capture", order);
 
             console.log("data.orderID", data.orderID);
-            handleApprove(data.orderID);  // Mark the product as approved
+            handleApprove(data.id);  // Mark the product as approved
           }}
 
           onCancel={() => {
