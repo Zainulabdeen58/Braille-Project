@@ -42,12 +42,12 @@ const accessibilitySlice = createSlice({
     // Zoom IN And OUT
 
     zoomIn : (state)=>{
-      state.zoomLevel = Math.min(state.zoomLevel + 0.1, 1.2); // Max zoom: 120%
+      state.zoomLevel = Math.min(state.zoomLevel + 0.03, 1.09); // Max zoom: 109%
       localStorage.setItem("Zoom" , state.zoomLevel);
     },
 
     zoomOut : (state) => {
-      state.zoomLevel = Math.max(state.zoomLevel - 0.1, 1); // Max zoom: 80%
+      state.zoomLevel = Math.max(state.zoomLevel - 0.03, 0.94); // Max zoom: 80%
       localStorage.setItem("Zoom" , state.zoomLevel);
 
     }
