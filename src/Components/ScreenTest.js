@@ -185,45 +185,71 @@
 // export default ScreenReader;
 
 
-import React from "react";
-import { img10 } from "../Assets/Product_images";
+import React,{useState} from "react";
+// import { img10 } from "../Assets/Product_images";
 
-import {
-  TransformWrapper,
-  TransformComponent,
-  useControls
-} from "react-zoom-pan-pinch";
+// import {
+//   TransformWrapper,
+//   TransformComponent,
+//   useControls
+// } from "react-zoom-pan-pinch";
 
-export const Controls = () => {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
+// export const Controls = () => {
+//   const { zoomIn, zoomOut, resetTransform } = useControls();
+
+//   return (
+//     <div className="tools">
+//       <button onClick={() => zoomIn()}>+</button>
+//       <button onClick={() => zoomOut()}>-</button>
+//       <button onClick={() => resetTransform()}>x</button>
+//     </div>
+//   );
+// };
+
+// const ScreenReader = () => {
+//   return (
+//     <TransformWrapper
+//       initialScale={1}
+//       initialPositionX={200}
+//       initialPositionY={100}
+//     >
+//       {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+//         <>
+//           <Controls />
+//           <TransformComponent>
+//             <img src={img10} alt="test" />
+//             <div>Example text</div>
+//           </TransformComponent>
+//         </>
+//       )}
+//     </TransformWrapper>
+//   );
+// };
+
+
+const ScreenReader =()=> {
+  const [cursor, setCursor] = useState('crosshair');
+  
+  const changeCursor = () => {
+    setCursor(prevState => {
+      if(prevState === 'crosshair'){
+        return 'pointer';
+      }
+      return 'crosshair';
+    });
+  }
 
   return (
-    <div className="tools">
-      <button onClick={() => zoomIn()}>+</button>
-      <button onClick={() => zoomOut()}>-</button>
-      <button onClick={() => resetTransform()}>x</button>
+    <div className="App" style={{ cursor: cursor }}>
+
+      <h2>Click to change mouse cursor</h2>
+      <input  type="button" value="Change cursor" 
+      onClick={changeCursor}
+      style={{ cursor: cursor }}
+
+      />
     </div>
   );
-};
-
-const ScreenReader = () => {
-  return (
-    <TransformWrapper
-      initialScale={1}
-      initialPositionX={200}
-      initialPositionY={100}
-    >
-      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-        <>
-          <Controls />
-          <TransformComponent>
-            <img src={img10} alt="test" />
-            <div>Example text</div>
-          </TransformComponent>
-        </>
-      )}
-    </TransformWrapper>
-  );
-};
+}
 
 export default ScreenReader;

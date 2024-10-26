@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./index.css";
-import store from "./Redux/store/store";  
-import { Provider } from "react-redux"; 
-import { ToastContainer } from "react-toastify"; 
+import store from "./Redux/store/store";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { RouterProvider } from "react-router-dom";
@@ -13,9 +13,11 @@ export default function App() {
     <React.StrictMode>
       <PayPalScriptProvider options={{ "client-id": process.env.Client_ID }}>
         <Provider store={store}>
-          <RouterProvider router={Routers}>
+          <Suspense fallback={<div>Loading.....</div>}>
+            <RouterProvider router={Routers}>
 
-          </RouterProvider>
+            </RouterProvider>
+          </Suspense>
           <ToastContainer />
         </Provider>
       </PayPalScriptProvider>
@@ -23,12 +25,11 @@ export default function App() {
   );
 }
 
-
 // import React from "react";
 // import "./index.css";
-// import store from "./Redux/store/store";  
-// import { Provider } from "react-redux"; 
-// import { ToastContainer } from "react-toastify"; 
+// import store from "./Redux/store/store";
+// import { Provider } from "react-redux";
+// import { ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 // import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 // import { RouterProvider } from "react-router-dom";
@@ -44,14 +45,14 @@ export default function App() {
 //       <PayPalScriptProvider options={{ "client-id": process.env.Client_ID }}>
 //         <Provider store={store}>
 //           <TransformWrapper initialScale={1} initialPositionX={100} initialPositionY={100}>
-            
+
 //               <>
 //                 <Controls />
 //                 <TransformComponent>
 //                   <RouterProvider router={Routers} />
 //                 </TransformComponent>
 //               </>
-          
+
 //           </TransformWrapper>
 //           <ToastContainer />
 //         </Provider>

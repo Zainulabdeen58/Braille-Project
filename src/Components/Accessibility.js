@@ -5,6 +5,9 @@ import {
   toggleSpeak,
   stopSpeech,
   toggleHighContrast,
+  toggleTextSize,
+  toggleCursorSize,
+  toggleFontStyle  
 } from "../Redux/accessibility/index";
 import { zoomIn , zoomOut } from "../Redux/accessibility/index";
 
@@ -17,6 +20,28 @@ function Accessibility() {
 
   const zoomLevel = useSelector((state)=> state.accessibility.zoomLevel);
 
+  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
+
+  const isCursorSize = useSelector((state) => state.accessibility.isCursorSize);
+
+  const isFontStyle = useSelector((state) => state.accessibility.isFontStyle); 
+ 
+  // Cursor Size 
+  useEffect(() => {
+    document.body.className = isCursorSize ? "large-cursor" : "default-cursor";
+  }, [isCursorSize]);
+
+  // Font Style 
+  useEffect(() => {
+    document.body.className = isFontStyle ? "italic" : "normal";
+  }, [isFontStyle]);
+
+  // Zoom the screen
+  useEffect(()=> {
+    document.body.style.zoom = zoomLevel;
+    // document.body.style.transform = `scale(${zoomLevel})`;
+    // document.body.style.transformOrigin = "0 0";  // Ensures scaling starts from the top-left corner
+  }, [zoomLevel]);
 
   const handleSpeak = () => {
     dispatch(toggleSpeak());
@@ -38,12 +63,19 @@ function Accessibility() {
     dispatch(zoomOut());
   };
   
-  useEffect(()=> {
-    document.body.style.zoom = zoomLevel;
-    // document.body.style.transform = `scale(${zoomLevel})`;
-    // document.body.style.transformOrigin = "0 0";  // Ensures scaling starts from the top-left corner
+  const handleTextSize = () => {
+    dispatch(toggleTextSize());
+  };
 
-  }, [zoomLevel]);
+   const handleCursorToggle = () => {
+    dispatch(toggleCursorSize());
+  };
+
+  const handleFontStyle = () => {
+    dispatch(toggleFontStyle());
+  };
+
+
 
   return (
     <div className="fixed bottom-3 left-3 z-[101]">
@@ -65,6 +97,7 @@ function Accessibility() {
               {/*  */}
 
               <label className="inline-flex items-center cursor-pointer">
+                
                 <input
                   type="checkbox"
                   onClick={handleSpeak}
@@ -92,6 +125,53 @@ function Accessibility() {
                   {isHighContrast ? "High Contrast" : "Low Contrast"}
                 </span>
               </label>
+
+              {/*  */}
+              <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleTextSize}
+                  value={isTextSize}
+                  className="sr-only peer"
+                  checked={isTextSize}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                  {isTextSize ? "Bigger Text" : "Default Text"}
+                </span>
+              </label>
+
+              {/*  */}
+              <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleCursorToggle}
+                  value={isCursorSize}
+                  className="sr-only peer"
+                  checked={isCursorSize}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                  {isCursorSize ? "Big Cursor" : "Normal Cursor"}
+                </span>
+              </label>
+
+               {/*  */}
+               <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleFontStyle}
+                  value={isFontStyle}
+                  className="sr-only peer"
+                  checked={isFontStyle}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                {isFontStyle ? "Italic" : "Normal"}
+                </span>
+              </label>              
+
+              
 
               {/* Zoom Buttons */}
 

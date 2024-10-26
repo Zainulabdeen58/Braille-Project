@@ -6,11 +6,16 @@ import { useDispatch ,useSelector} from "react-redux";
 import { increaseQuantity,decreaseQuantity,addToCart } from "../../Redux/cartslice";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import { speakText } from "../../Redux/accessibility";
 
 function SingleProduct() {
   const dispatch = useDispatch();
   const Items = useSelector((state) => state.cart.items);
+  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
+  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
+
   const Param = useParams();
+
   const { id } = Param;
 
   const Product = Data.find((user) => user.id === Number(id));
@@ -48,12 +53,32 @@ function SingleProduct() {
           className="w-full min-h-screen my-4 flex justify-center items-center md:w-[55%] md:my-0 lg:h-[100vh]"
         >
           <div className="block mx-auto w-[80%] text-center md:w-[60%]">
-            <h1 className="text-3xl font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl ">
-              Julie
+            <h1
+              className={`${isTextSize? "text-4xl" : "text-3xl"} font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl`}
+              onMouseEnter={() => dispatch(speakText(Product.artist))} // Call speakText on focus
+              tabIndex={0} // Make it focusable
+            >
+              {Product.artist}
             </h1>
-            <h5 className="my-3 md:my-4 lg:my-5">Painting, Drawing & Works on Paper</h5>
-            <p className="text-2xl my-3 underline italic font-bold">3D</p>
-            <p className="text-justify">
+            <h5
+              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
+              onMouseEnter={() =>
+                dispatch(speakText("Painting, Drawing & Works on Paper"))
+              }
+            >
+              Painting, Drawing & Works on Paper
+            </h5>
+            <p
+              className={` my-3 underline italic font-bold ${isTextSize? "text-3xl" : "text-2xl"}`}
+              onMouseEnter={() => dispatch(speakText("Classic"))}
+            >
+              {Product.dimension}
+            </p>
+            <p
+              className={`text-justify ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
+              onMouseEnter={() => dispatch(speakText(Product.description))} // Call speakText on focus
+              tabIndex={0} // Make it focusable
+            >
               {Product.description}
             </p>
             <div className="flex gap-4 max-md:flex-col mt-6 md:mt-4 lg:mt-6">

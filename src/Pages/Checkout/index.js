@@ -12,6 +12,8 @@ function Checkout() {
 
   const dispatch = useDispatch();
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
+  const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
+
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -41,7 +43,7 @@ function Checkout() {
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
             <div className="flex gap-1 flex-col items-center space-y-2 mb-2">
               <span
-                className={`text-md ${isHighContrast ? "text-black ":  "text-[#575d70]" }`}
+                className={`${isHighContrast ? "text-black ":  "text-[#575d70]" } ${isTextSize? "text-lg": "text-base"} `}
                 onMouseEnter={() => handleSpeak("Express checkout")}
               >
                 Express checkout
@@ -184,14 +186,14 @@ function Checkout() {
           </div>
 
           {/* Product Section in checkout */}
-          <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"}`}>
+          <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"} `}>
             <div className="relative h-full">
               <div className="px-5 py-6  sm:overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 sm:h-[calc(100vh-60px)]  md:px-7 md:pr-9 md:pb-28">
                 <div className="space-y-4">
                   {items.map((item) => {
                     return (
                       <div key={item.id} className="flex items-start gap-4">
-                        <div className="w-32 h-28 max-lg:w-24 max-lg:h-24 flex p-2 shrink-0 bg-gray-300 rounded-md justify-center items-center">
+                        <div className={` ${isTextSize? "w-36 h-32": "w-32 h-28"} max-lg:w-24 max-lg:h-24 flex p-2 shrink-0 bg-gray-300 rounded-md justify-center items-center`}>
                           <img
                             src={item.img}
                             className="w-full h-full object-cover rounded-md"
@@ -200,11 +202,11 @@ function Checkout() {
                         </div>
 
                         <div className="w-full">
-                          <h3 className="text-base lg:text-lg" onMouseEnter={() => handleSpeak(item.artist)} >
+                          <h3 className={`${isTextSize? "text-xl lg:text-2xl " : "text-base lg:text-lg"}`} onMouseEnter={() => handleSpeak(item.artist)} >
                             {item.artist}
                           </h3>
                           <ul
-                            className={`text-xs lg:text-sm space-y-2 mt-2 text-gray-600   `}
+                            className={` ${isTextSize? "text-sm lg:text-base " : "text-xs lg:text-sm"}  space-y-2 mt-2 text-gray-600   `}
                           >
                             <li className="flex">
                               <span
@@ -280,7 +282,7 @@ function Checkout() {
 
                 {/* For Subtotal */}
                 <div
-                  className="flex justify-between mt-2 text-primary_alt text-[0.88rem] lg:text-sm"
+                  className={`flex justify-between mt-2 text-primary_alt ${isTextSize? "text-base" : "text-sm"}  `}
                 >
                   <span onMouseEnter={() => handleSpeak("Subtotal Items")}>
                     Subtotal {items.length} Items
@@ -291,7 +293,7 @@ function Checkout() {
                 </div>
 
                 {/* For Shipping */}
-                <div className="flex justify-between mt-2 text-[14px] lg:text-sm">
+                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} `}>
                   <span
                     className={`text-primary_alt  `}
                     onMouseEnter={() => handleSpeak("Shipping")}
@@ -307,7 +309,7 @@ function Checkout() {
                 </div>
 
                 {/* For Total */}
-                <div className="flex justify-between mt-2 text-base lg:text-lg text-primary_alt">
+                <div className={`flex justify-between mt-2  text-primary_alt ${isTextSize? "text-lg lg:text-xl" : "text-base lg:text-lg"} `}>
                   <span onMouseEnter={() => handleSpeak("Total")}>Total</span>
                   <span onMouseEnter={() => handleSpeak(`$ ${subTotal}`)}>
                     USD ${parseFloat(subTotal).toFixed(2)}

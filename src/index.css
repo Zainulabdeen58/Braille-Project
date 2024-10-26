@@ -11,7 +11,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+}
+/* Default Cursor */
+body.default-cursor {
+  cursor: auto;
+}
+
+/* Large Cursor */
+body.large-cursor {
+  cursor: url('/src/Assets/cursor/cursor-50.png'), auto;
 }
 
 code {

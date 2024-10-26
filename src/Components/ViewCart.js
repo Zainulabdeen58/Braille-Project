@@ -13,6 +13,7 @@ import { speakText } from "../Redux/accessibility";
 function ViewCart() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items); // Adjust according to your state structure
+  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -164,13 +165,13 @@ function ViewCart() {
 
                       <div className="flex flex-col">
                         <h3
-                          className="text-base max-sm:text-sm font-bold text-gray-800"
+                          className={` ${isTextSize? "text-lg" : "text-base"}  max-sm:text-sm font-bold text-gray-800`}
                           onMouseEnter={() => handleSpeak(item.artist)}
                         >
                           {item.artist}
                         </h3>
                         <p
-                          className="text-xs font-semibold text-gray-500 mt-0.5"
+                          className={` ${isTextSize? "text-sm" : "text-xs"} font-semibold text-gray-500 mt-0.5`}
                           onMouseEnter={() => handleSpeak(item.dimension)}
                         >
                           {item.dimension}

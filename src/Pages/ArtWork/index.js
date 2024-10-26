@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { useState } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
 import { useDispatch , useSelector} from "react-redux";
@@ -6,12 +6,12 @@ import { addToCart } from "../../Redux/cartslice";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility/index";
-
-
-const Container = lazy(() => import("../../Components/Container"));
+import Container from "../../Components/Container";
 
 function ArtWork() {
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
+  const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
+
   const [isFavorited, setIsFavorited] = useState(false);
   const dispatch = useDispatch();
 
@@ -39,12 +39,12 @@ function ArtWork() {
   };
  
   const handleSpeak =(text)=>{
+    // console.log(isHighContrast);
+    
     dispatch(speakText(text))
   }
   return (
     <>
-      <Suspense fallback={<div>Loading ...</div>}>
-
       <Container>
         
         <section
@@ -87,14 +87,14 @@ function ArtWork() {
 
                 {/* Card Content section */}
                 <div className="px-4 py-3 w-72 lg:w-56 xlg:w-64 2xlg:w-72">
-                  <span className=" mr-3 uppercase text-xs" onMouseEnter={()=> handleSpeak(product.dimension)}>
+                  <span className={` mr-3 uppercase  ${isTextSize? "text-[0.9rem]" : "text-xs"}`} onMouseEnter={()=> handleSpeak(product.dimension)}>
                     {product.dimension}
                   </span>
-                  <span className="text-lg font-bold text-black truncate block capitalize" onMouseEnter={()=> handleSpeak(product.artist)}>
+                  <span className={`font-bold text-black truncate block capitalize ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(product.artist)}>
                     {product.artist}
                   </span>
                   <div className="flex items-center">
-                    <span className="text-lg font-semibold text-black cursor-auto my-3" onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
+                    <span className={`font-semibold text-black cursor-auto my-3 ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
                       ${product.price}
                     </span>
                     {/* Icon Add to Cart */}
@@ -124,7 +124,7 @@ function ArtWork() {
           })}
         </section>
       </Container>
-      </Suspense>
+     
     </>
   );
 }

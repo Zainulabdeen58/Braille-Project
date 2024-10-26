@@ -16,6 +16,9 @@ import { speakText } from "../../Redux/accessibility";
 function SingleProduct() {
   const dispatch = useDispatch();
   const Items = useSelector((state) => state.cart.items);
+  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
+  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
+  
   const { id } = useParams();
 
   const Product = Data.find((user) => user.id === Number(id));
@@ -55,7 +58,7 @@ function SingleProduct() {
         >
           <div className="block mx-auto w-[80%] text-center md:w-[60%]">
             <h1
-              className="text-3xl font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl"
+              className={`${isTextSize? "text-4xl" : "text-3xl"} font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl`}
               onMouseEnter={() => dispatch(speakText(Product.artist))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >
@@ -63,7 +66,7 @@ function SingleProduct() {
             </h1>
 
             <h5
-              className="my-3 md:my-4 lg:my-5"
+              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
               onMouseEnter={() =>
                 dispatch(speakText("Painting, Drawing & Works on Paper"))
               }
@@ -71,14 +74,14 @@ function SingleProduct() {
               Painting, Drawing & Works on Paper
             </h5>
             <p
-              className="text-2xl my-3 underline italic font-bold"
+              className={` my-3 underline italic font-bold ${isTextSize? "text-3xl" : "text-2xl"}`}
               onMouseEnter={() => dispatch(speakText("Classic"))}
             >
               Classic
             </p>
 
             <p
-              className="text-justify"
+              className={`text-justify ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
               onMouseEnter={() => dispatch(speakText(Product.description))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >
@@ -112,7 +115,7 @@ function SingleProduct() {
                   <button
                     type="button"
                     onClick={() =>
-                      dispatch(decreaseQuantity({ id: Product.id }))
+                      dispatch(decreaseQuantity(Product.id ))
                     }
                   >
                     <svg
@@ -131,7 +134,7 @@ function SingleProduct() {
                   <button
                     type="button"
                     onClick={() =>
-                      dispatch(increaseQuantity({ id: Product.id }))
+                      dispatch(increaseQuantity(Product.id ))
                     }
                   >
                     <svg

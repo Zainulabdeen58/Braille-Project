@@ -25,7 +25,7 @@ const cartSlice = createSlice({
     },
     
     increaseQuantity: (state, action) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      const existingItem = state.items.find(item => item.id === action.payload);
       if (existingItem) {
         existingItem.quantity += 1;
         localStorage.setItem('cartItems', JSON.stringify(state.items));
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
     },
     
     decreaseQuantity: (state, action) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      const existingItem = state.items.find(item => item.id === action.payload);
       if (existingItem && existingItem.quantity > 1) {
         existingItem.quantity -= 1;
         localStorage.setItem('cartItems', JSON.stringify(state.items));
