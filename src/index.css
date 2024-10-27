@@ -20,7 +20,7 @@ body.default-cursor {
 /* Large Cursor */
 body.large-cursor {
   cursor: url('/src/Assets/cursor/cursor-50.png'), auto;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 code {
