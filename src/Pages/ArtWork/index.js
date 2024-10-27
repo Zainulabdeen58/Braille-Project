@@ -11,6 +11,10 @@ import Container from "../../Components/Container";
 function ArtWork() {
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
+  const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
+  const isLineHeight = useSelector((state)=> state.accessibility.isLineHeight);
+  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
+
 
   const [isFavorited, setIsFavorited] = useState(false);
   const dispatch = useDispatch();
@@ -38,9 +42,7 @@ function ArtWork() {
     });
   };
  
-  const handleSpeak =(text)=>{
-    // console.log(isHighContrast);
-    
+  const handleSpeak =(text)=>{    
     dispatch(speakText(text))
   }
   return (
@@ -50,7 +52,7 @@ function ArtWork() {
         <section
            
           id="Projects"
-          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 ${isHighContrast? "font-bold text-black" : "text-gray-400"}`}
+          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 ${isHighContrast? "font-bold text-black" : "text-gray-400"} ${isTextSpace? "tracking-widest" : ""} ${isLineHeight ? "leading-loose" :  ""}`}
         >
           {/* Card Image Section */}
           {Data.map((product) => {
@@ -62,12 +64,15 @@ function ArtWork() {
                 {/* Card Image */}
 
                 <NavLink to={`/artwork-shop/${product.id}`}>
+                
                   <img
                     src={product.img}
                     alt="Product"
-                    className="h-80 w-72 object-cover rounded-t-xl"
+                    className={`h-80 w-72 object-cover rounded-t-xl ${isLinkHighLight ? "relative":  ""}`}
                     loading="lazy"
                   />
+                  <span className={`${ isLinkHighLight ? "rounded-t-xl bg-yellow-400 absolute top-0 h-80 w-full opacity-30 z-10" : "" }`}>
+                </span>
                 </NavLink>
 
                  {/* Favourite Button */}
@@ -76,7 +81,7 @@ function ArtWork() {
                     isFavorited[product.id] ? "Unfavorite" : "Favorite"
                   }
                   onClick={() => toggleFavorite(product.id)}
-                  className="absolute top-2 right-2 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
+                  className="absolute top-2 right-2 z-50 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
                 >
                   <FaHeart
                     className={`text-2xl transition-colors duration-300 ${
@@ -94,7 +99,7 @@ function ArtWork() {
                     {product.artist}
                   </span>
                   <div className="flex items-center">
-                    <span className={`font-semibold text-black cursor-auto my-3 ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
+                  <span className={`font-semibold text-black cursor-auto my-3 ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
                       ${product.price}
                     </span>
                     {/* Icon Add to Cart */}
@@ -118,6 +123,7 @@ function ArtWork() {
                       </svg>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             );

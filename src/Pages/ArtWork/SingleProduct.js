@@ -18,7 +18,9 @@ function SingleProduct() {
   const Items = useSelector((state) => state.cart.items);
   const isTextSize = useSelector((state) => state.accessibility.isTextSize);
   const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
-  
+  const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
+  const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
+    
   const { id } = useParams();
 
   const Product = Data.find((user) => user.id === Number(id));
@@ -48,17 +50,17 @@ function SingleProduct() {
       >
         <div
           id="product-image"
-          className="w-full md:w-[45%] md:min-h-screen lg:h-[100vh]"
+          className="w-full md:w-[45%] md:min-h-screen xlg:h-[125vh]"
         >
           <img src={Product.img} alt="product_pic" className="h-full w-full" />
         </div>
         <div
           id="product-content"
-          className="w-full min-h-screen my-4 flex justify-center items-center md:w-[55%] md:my-0 lg:h-[100vh]"
+          className="w-full min-h-screen my-4 flex justify-center items-center md:w-[55%] md:my-0 "
         >
           <div className="block mx-auto w-[80%] text-center md:w-[60%]">
             <h1
-              className={`${isTextSize? "text-4xl" : "text-3xl"} font-semibold mb-4 md:text-4xl md:mb-7 md:mt-2 lg:text-5xl`}
+              className={`${isTextSize? "lg:text-6xl text-5xl" : " lg:text-5xl text-4xl"}  font-semibold mb-4  md:mb-7 md:mt-2  ${isTextSpace ? "tracking-widest" : ""}`}
               onMouseEnter={() => dispatch(speakText(Product.artist))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >
@@ -66,7 +68,7 @@ function SingleProduct() {
             </h1>
 
             <h5
-              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
+              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"} ${isTextSpace ? "tracking-widest" : ""}`}
               onMouseEnter={() =>
                 dispatch(speakText("Painting, Drawing & Works on Paper"))
               }
@@ -74,14 +76,14 @@ function SingleProduct() {
               Painting, Drawing & Works on Paper
             </h5>
             <p
-              className={` my-3 underline italic font-bold ${isTextSize? "text-3xl" : "text-2xl"}`}
+              className={` my-3 underline italic font-bold ${isTextSize? "text-3xl" : "text-2xl"} ${isTextSpace ? "tracking-widest" : ""} `}
               onMouseEnter={() => dispatch(speakText("Classic"))}
             >
               Classic
             </p>
 
             <p
-              className={`text-justify ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"}`}
+              className={`text-justify ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-bold" : "font-normal"} ${isTextSpace ? "tracking-widest" : ""} ${isLineHeight? " leading-relaxed" : ""} `}
               onMouseEnter={() => dispatch(speakText(Product.description))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >

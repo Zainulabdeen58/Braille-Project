@@ -13,6 +13,11 @@ function Checkout() {
   const dispatch = useDispatch();
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
+  const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
+  const isLineHeight = useSelector((state)=> state.accessibility.isLineHeight);
+  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
+
+
 
   const items = useSelector((state) => state.cart.items);
   const subTotal = items.reduce(
@@ -43,7 +48,7 @@ function Checkout() {
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
             <div className="flex gap-1 flex-col items-center space-y-2 mb-2">
               <span
-                className={`${isHighContrast ? "text-black ":  "text-[#575d70]" } ${isTextSize? "text-lg": "text-base"} `}
+                className={`${isHighContrast ? "text-black ":  "text-[#575d70]" } ${isTextSize? "text-lg": "text-base"} ${isTextSpace? "tracking-widest" : ""} `}
                 onMouseEnter={() => handleSpeak("Express checkout")}
               >
                 Express checkout
@@ -78,7 +83,7 @@ function Checkout() {
             </div>
 
             <h2
-              className="text-2xl lg:text-3xl font-bold text-gray-800"
+              className={`font-bold text-gray-800 ${isTextSize? "text-3xl lg:text-4xl" : "text-2xl lg:text-3xl"} ${isTextSpace? "tracking-widest" : ""} `}
               onMouseEnter={() => handleSpeak("Complete your order")}
             >
               Complete your order
@@ -86,7 +91,7 @@ function Checkout() {
             <form className="mt-8">
               <div>
                 <h3
-                  className="text-base lg:text-lg font-bold text-gray-800 mb-4"
+                  className={` font-bold text-gray-800 mb-4 ${isTextSize? "text-lg lg:text-xl" : "text-base lg:text-lg"} ${isTextSpace? "tracking-widest" : ""} `}
                   onMouseEnter={() => handleSpeak("Personal Details")}
                 >
                   Personal Details
@@ -132,7 +137,7 @@ function Checkout() {
 
               <div className="mt-8">
                 <h3
-                  className="text-base lg:text-lg font-bold text-gray-800 mb-4"
+                  className={` font-bold text-gray-800 mb-4 ${isTextSize? "text-lg lg:text-xl" : "text-base lg:text-lg"} ${isTextSpace? "tracking-widest" : ""}`}
                   onMouseEnter={() => handleSpeak("Shipping Address")}
                 >
                   Shipping Address
@@ -175,10 +180,11 @@ function Checkout() {
                 <div className="flex gap-4 max-md:flex-col mt-8">
                   <button
                     type="button"
-                    className="rounded-md px-6 py-3 w-full text-sm lg:text-base tracking-wide bg-primary_alt hover:bg-primary  text-white"
-                    onMouseEnter={() => handleSpeak("Pay Now")}
-                  >
+                    className={`rounded-md px-6 py-3 w-full text-sm lg:text-base tracking-wide bg-primary_alt hover:bg-primary `}
+                    onMouseEnter={() => handleSpeak("Pay Now")}>
+                    <span className={`${isLinkHighLight? "text-yellow-600 bg-white" : "text-white"}`}>
                     Pay Now
+                    </span>
                   </button>
                 </div>
               </div>
@@ -201,7 +207,7 @@ function Checkout() {
                           />
                         </div>
 
-                        <div className="w-full">
+                        <div className={`w-full ${isTextSpace? "tracking-widest" : ""}`}>
                           <h3 className={`${isTextSize? "text-xl lg:text-2xl " : "text-base lg:text-lg"}`} onMouseEnter={() => handleSpeak(item.artist)} >
                             {item.artist}
                           </h3>
@@ -259,7 +265,7 @@ function Checkout() {
                 </div>
               </div>
 
-              <div className={`px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9 ${isHighContrast? "font-bold" : "font-normal"}`}>
+              <div className={`px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9 ${isHighContrast? "font-bold" : "font-normal"} `}>
                 {/* For Coupon */}
                 <div className="flex justify-between items-center gap-5 md:gap-4">
                   <div className="flex-1">
@@ -282,7 +288,7 @@ function Checkout() {
 
                 {/* For Subtotal */}
                 <div
-                  className={`flex justify-between mt-2 text-primary_alt ${isTextSize? "text-base" : "text-sm"}  `}
+                  className={`flex justify-between mt-2 text-primary_alt ${isTextSize? "text-base" : "text-sm"} ${isTextSpace? "tracking-widest" : ""}`}
                 >
                   <span onMouseEnter={() => handleSpeak("Subtotal Items")}>
                     Subtotal {items.length} Items
@@ -293,7 +299,7 @@ function Checkout() {
                 </div>
 
                 {/* For Shipping */}
-                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} `}>
+                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} ${isTextSpace? "tracking-widest" : ""} ${isLineHeight? "leading-loose" : ""}`}>
                   <span
                     className={`text-primary_alt  `}
                     onMouseEnter={() => handleSpeak("Shipping")}
@@ -309,7 +315,7 @@ function Checkout() {
                 </div>
 
                 {/* For Total */}
-                <div className={`flex justify-between mt-2  text-primary_alt ${isTextSize? "text-lg lg:text-xl" : "text-base lg:text-lg"} `}>
+                <div className={`flex justify-between mt-2  text-primary_alt ${isTextSize? "text-lg lg:text-xl" : "text-base lg:text-lg"} ${isTextSpace? "tracking-widest" : ""}`}>
                   <span onMouseEnter={() => handleSpeak("Total")}>Total</span>
                   <span onMouseEnter={() => handleSpeak(`$ ${subTotal}`)}>
                     USD ${parseFloat(subTotal).toFixed(2)}

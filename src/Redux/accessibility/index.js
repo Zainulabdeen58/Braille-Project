@@ -7,9 +7,12 @@ const accessibilitySlice = createSlice({
     isHighContrast: JSON.parse(localStorage.getItem("HighContrast")) || false, // Parse to boolean
     zoomLevel: parseFloat(localStorage.getItem("Zoom")) || 1, // Ensure zoomLevel is a number
     isTextSize: JSON.parse(localStorage.getItem("TextSize")) || false, // Parse to boolean
-    // saturationLevel: 1, // Default is 100%
+    isSaturationLevel: false, // Default is 100%
     isCursorSize: JSON.parse(localStorage.getItem("CursorSize")) || false,
-    isFontStyle : JSON.parse(localStorage.getItem("FontStyle")) || false,
+    isFontStyle: JSON.parse(localStorage.getItem("FontStyle")) || false,
+    isLineHeight: JSON.parse(localStorage.getItem("LineHeight")) || false,
+    isTextSpace: JSON.parse(localStorage.getItem("TextSpace")) || false,
+    isLinkHighLight: JSON.parse(localStorage.getItem("LinkHighLight")) || false,
   },
 
   reducers: {
@@ -19,7 +22,7 @@ const accessibilitySlice = createSlice({
     },
 
     speakText: (state, actions) => {
-        // alert(state.isSpeechEnabled);
+      // alert(state.isSpeechEnabled);
       //   alert(actions.payload);
 
       if (state.isSpeechEnabled && actions.payload) {
@@ -36,37 +39,39 @@ const accessibilitySlice = createSlice({
       window.speechSynthesis.cancel();
     },
 
-    // Highcontrast 
+    // Highcontrast
 
-    toggleHighContrast: (state)=>{
+    toggleHighContrast: (state) => {
       state.isHighContrast = !state.isHighContrast;
-      localStorage.setItem("HighContrast" , state.isHighContrast);
+      localStorage.setItem("HighContrast", state.isHighContrast);
     },
 
     // Zoom IN And OUT
 
-    zoomIn : (state)=>{
+    zoomIn: (state) => {
       state.zoomLevel = Math.min(state.zoomLevel + 0.03, 1.09); // Max zoom: 109%
-      localStorage.setItem("Zoom" , state.zoomLevel);
+      localStorage.setItem("Zoom", state.zoomLevel);
     },
 
-    zoomOut : (state) => {
+    zoomOut: (state) => {
       state.zoomLevel = Math.max(state.zoomLevel - 0.03, 0.94); // Max zoom: 80%
-      localStorage.setItem("Zoom" , state.zoomLevel);
-
+      localStorage.setItem("Zoom", state.zoomLevel);
     },
 
-    toggleTextSize: (state)=>{
+    toggleTextSize: (state) => {
       state.isTextSize = !state.isTextSize;
-      localStorage.setItem("TextSize" , state.isTextSize);
+      localStorage.setItem("TextSize", state.isTextSize);
     },
 
-
-    increaseSaturation: (state) => {
-      state.saturationLevel = Math.min(state.saturationLevel + 0.2, 2); // Max 200%
+    toggleSaturation: (state) => {
+      console.log("increaseSaturation");
+      state.isSaturationLevel = !state.isSaturationLevel;
+      // state.saturationLevel = Math.min(state.saturationLevel + 0.2, 2); // Max 200%
     },
     decreaseSaturation: (state) => {
-      state.saturationLevel = Math.max(state.saturationLevel - 0.2, 0); // Min 0%
+      console.log("decreaseSaturation");
+      
+      // state.saturationLevel = Math.max(state.saturationLevel - 0.2, 0); // Min 0%
     },
 
     toggleCursorSize: (state) => {
@@ -77,9 +82,41 @@ const accessibilitySlice = createSlice({
     toggleFontStyle: (state) => {
       state.isFontStyle = !state.isFontStyle;
       localStorage.setItem("FontStyle", state.isFontStyle);
-    }
+    },
+
+    toggleLineHeight: (state) => {
+      state.isLineHeight = !state.isLineHeight;
+      localStorage.setItem("LineHeight", state.isLineHeight);
+    },
+
+    toggleTextSpacing : (state) => {
+      state.isTextSpace = !state.isTextSpace;
+      localStorage.setItem("TextSpace", state.isTextSpace);
+    },
+    
+    toggleLinkHighLight : (state) => {
+      state.isLinkHighLight = !state.isLinkHighLight;
+      localStorage.setItem("LinkHighLight", state.isLinkHighLight);
+    },
+
   },
 });
 
-export const { toggleSpeak, speakText, stopSpeech ,toggleHighContrast, zoomIn , zoomOut, toggleTextSize, toggleFontStyle, increaseSaturation, decreaseSaturation,  toggleCursorSize } =  accessibilitySlice.actions;
+export const {
+  toggleSpeak,
+  speakText,
+  stopSpeech,
+  toggleHighContrast,
+  zoomIn,
+  zoomOut,
+  toggleTextSize,
+  toggleCursorSize,
+  toggleFontStyle,
+  toggleLineHeight,
+  toggleTextSpacing,
+  toggleLinkHighLight,
+  toggleSaturation
+  // increaseSaturation,
+  // decreaseSaturation,
+} = accessibilitySlice.actions;
 export default accessibilitySlice.reducer;

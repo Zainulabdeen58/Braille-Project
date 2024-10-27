@@ -14,6 +14,12 @@ function ViewCart() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items); // Adjust according to your state structure
   const isTextSize = useSelector((state) => state.accessibility.isTextSize);
+  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
+  const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
+  const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
+  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
+
+
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -119,13 +125,11 @@ function ViewCart() {
           className="drawer-overlay"
         ></label>
 
-        {/****** <div className={`bg-gray-100 sm:h-screen sm:sticky sm:top-0 lg:min-w-[45%] sm:min-w-[45%] ${isHighContrast ? "font-bold" : "font-normal"}`}> */}
-
         <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-full z-[1001]">
           <div className="overflow-auto p-6 h-[calc(100vh-135px)]">
             <div className="flex items-center gap-4 text-gray-800">
               <h3
-                className="text-2xl font-bold flex-1"
+                className={`text-2xl  flex-1 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
                 onMouseEnter={() => handleSpeak("Shopping Cart")}
               >
                 Shopping cart
@@ -163,15 +167,15 @@ function ViewCart() {
                         />
                       </div>
 
-                      <div className="flex flex-col">
+                      <div className={`flex flex-col  `}>
                         <h3
-                          className={` ${isTextSize? "text-lg" : "text-base"}  max-sm:text-sm font-bold text-gray-800`}
+                          className={` ${isTextSize? "text-lg" : "text-base"} max-sm:text-sm ${isHighContrast? "font-extrabold" : "font-bold"}  ${isTextSpace ? "tracking-widest " : ""} text-gray-800`}
                           onMouseEnter={() => handleSpeak(item.artist)}
                         >
                           {item.artist}
                         </h3>
                         <p
-                          className={` ${isTextSize? "text-sm" : "text-xs"} font-semibold text-gray-500 mt-0.5`}
+                          className={` ${isTextSize? "text-sm" : "text-xs"} ${isHighContrast? "font-bold" : "font-semibold"} ${isTextSpace ? "tracking-widest " : ""} ${isLineHeight ? "leading-loose" : ""} text-gray-500 mt-0.5`} 
                           onMouseEnter={() => handleSpeak(item.dimension)}
                         >
                           {item.dimension}
@@ -206,7 +210,7 @@ function ViewCart() {
 
                     <div className="ml-auto">
                       <h4
-                        className="text-lg max-sm:text-base font-bold text-gray-800"
+                        className={`text-lg max-sm:text-base text-gray-800 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
                         onMouseEnter={() =>
                           handleSpeak(`$ ${item.price * item.quantity}`)
                         }
@@ -219,7 +223,7 @@ function ViewCart() {
                         <button
                           type="button"
                           onClick={() => {
-                            dispatch(decreaseQuantity({ id: item.id }));
+                            dispatch(decreaseQuantity(item.id ));
                           }}
                         >
                           <svg
@@ -244,7 +248,7 @@ function ViewCart() {
                         <button
                           type="button"
                           onClick={() => {
-                            dispatch(increaseQuantity({ id: item.id }));
+                            dispatch(increaseQuantity(item.id));
                           }}
                         >
                           <svg
@@ -265,10 +269,10 @@ function ViewCart() {
               );
             })}
           </div>
-          {/* className={`px-5 py-3 md:absolute md:left-0 md:bottom-0 bg-gray-100 w-full h-auto  md:px-7 md:pr-9 ${isHighContrast? "font-bold" : "font-normal"}`} */}
-          <div className="p-6 absolute bottom-0 w-full border-t bg-white">
+          
+          <div className={`p-6 absolute bottom-0 w-full border-t bg-white ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-extrabold" : " font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}>
             <ul className="text-gray-800 divide-y">
-              <li className="flex flex-wrap gap-4 text-lg font-bold">
+              <li className="flex flex-wrap gap-4 ">
                 <span onMouseEnter={() => handleSpeak("Subtotal")}>
                   Subtotal
                 </span>
@@ -286,7 +290,10 @@ function ViewCart() {
                 className="mt-6 text-sm font-semibold px-6 py-3 w-full bg-primary_alt hover:bg-primary  text-white rounded-md tracking-wide"
                 onMouseEnter={() => handleSpeak("Checkout")}
               >
+                <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
                 Checkout
+                </span>
+                
               </button>
             </NavLink>
           </div>

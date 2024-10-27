@@ -20,9 +20,23 @@ body.default-cursor {
 /* Large Cursor */
 body.large-cursor {
   cursor: url('/src/Assets/cursor/cursor-50.png'), auto;
+  background-color: aqua;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.fixed-accessibility-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 101;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 0; 
+  left: 0; 
 }

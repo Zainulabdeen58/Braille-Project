@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+// import "../index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { MdAccessibility } from "react-icons/md";
 import {
@@ -7,26 +8,34 @@ import {
   toggleHighContrast,
   toggleTextSize,
   toggleCursorSize,
-  toggleFontStyle  
+  toggleFontStyle,
+  toggleLineHeight,
+  toggleTextSpacing,  
+  toggleLinkHighLight,
+  toggleSaturation,
+  // decreaseSaturation,
+  // increaseSaturation,
 } from "../Redux/accessibility/index";
 import { zoomIn , zoomOut } from "../Redux/accessibility/index";
 
 function Accessibility() {
   const dispatch = useDispatch();
 
-  const isSpeechEnabled = useSelector((state) => state.accessibility.isSpeechEnabled);
-
-  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
-
-  const zoomLevel = useSelector((state)=> state.accessibility.zoomLevel);
-
-  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
-
-  const isCursorSize = useSelector((state) => state.accessibility.isCursorSize);
-
-  const isFontStyle = useSelector((state) => state.accessibility.isFontStyle); 
+  const {
+    isSpeechEnabled,
+    isHighContrast,
+    zoomLevel,
+    isTextSize,
+    isCursorSize,
+    isFontStyle,
+    isLineHeight,
+    isTextSpace,
+    isLinkHighLight,
+    isSaturationLevel,
+  } = useSelector((state) => state.accessibility); 
  
   // Cursor Size 
+
   useEffect(() => {
     document.body.className = isCursorSize ? "large-cursor" : "default-cursor";
   }, [isCursorSize]);
@@ -42,6 +51,18 @@ function Accessibility() {
     // document.body.style.transform = `scale(${zoomLevel})`;
     // document.body.style.transformOrigin = "0 0";  // Ensures scaling starts from the top-left corner
   }, [zoomLevel]);
+
+  // useEffect(() => {
+  //   document.body.style.filter = isSaturationLevel ? "hue-rotate(90deg)" : "none";
+  // }, [isSaturationLevel]);
+ useEffect(() => {
+  document.body.classList.toggle("saturate-200", isSaturationLevel);
+  document.body.classList.toggle("none", !isSaturationLevel);
+}, [isSaturationLevel]);
+
+// useEffect(() => {
+//   document.body.className =  isSaturationLevel ? "saturate-200 " : "saturate-100";
+// }, [isSaturationLevel]);
 
   const handleSpeak = () => {
     dispatch(toggleSpeak());
@@ -75,12 +96,36 @@ function Accessibility() {
     dispatch(toggleFontStyle());
   };
 
+  const handleLineHeight =()=>{
+    dispatch(toggleLineHeight());
+  }
 
+  const handleTextSpacing =()=>{
+    dispatch(toggleTextSpacing());
+  }
+
+  const handleLinkHighLight =()=>{
+    dispatch(toggleLinkHighLight());
+  }
+
+  // const handleDecreaseSaturation =()=>{
+  //   dispatch(decreaseSaturation());
+  // }
+  
+  // const handleIncreaseSaturation =()=>{
+  //   dispatch(increaseSaturation());
+  // }
+
+  const handleSaturation =()=>{
+    dispatch(toggleSaturation())
+  }
 
   return (
     <div className="fixed bottom-3 left-3 z-[101]">
+
+    <div className="fixed bottom-3 left-3 z-[101]">
       {/* Accessibility Button */}
-      <div className="dropdown dropdown-top">
+      <div className="dropdown dropdown-top fixed-accessibility-btn">
         <div
           tabIndex={0}
           role="button"
@@ -94,7 +139,7 @@ function Accessibility() {
         >
           <div className="card-body">
             <div className="card-actions">
-              {/*  */}
+              {/* Voice Button */}
 
               <label className="inline-flex items-center cursor-pointer">
                 
@@ -110,7 +155,8 @@ function Accessibility() {
                   {isSpeechEnabled ? "Voice ON" : "Voice OFF"}
                 </span>
               </label>
-              {/*  */}
+
+              {/* High Contrast Button*/}
 
               <label className="inline-flex items-center cursor-pointer">
                 <input
@@ -126,7 +172,7 @@ function Accessibility() {
                 </span>
               </label>
 
-              {/*  */}
+              {/* Text Size */}
               <label className="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -141,7 +187,7 @@ function Accessibility() {
                 </span>
               </label>
 
-              {/*  */}
+              {/* Cursor Size */}
               <label className="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -156,7 +202,7 @@ function Accessibility() {
                 </span>
               </label>
 
-               {/*  */}
+               {/* Font Style Button */}
                <label className="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -169,22 +215,76 @@ function Accessibility() {
                 <span className="ms-3 text-sm font-medium text-gray-900 ">
                 {isFontStyle ? "Italic" : "Normal"}
                 </span>
-              </label>              
+              </label> 
 
+               {/* Line Height Button */}
+               <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleLineHeight}
+                  value={isLineHeight}
+                  className="sr-only peer"
+                  checked={isLineHeight}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                {isLineHeight ? "Height large" : "Height Normal"}
+                </span>
+              </label> 
+
+               {/* Text Spacing Button */}
+               <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleTextSpacing}
+                  value={isTextSpace}
+                  className="sr-only peer"
+                  checked={isTextSpace}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                {isTextSpace ? "large Space" : "Normal Space"}
+                </span>
+              </label> 
+
+               {/* Link High-Light Button */}
+               <label className="inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  onClick={handleLinkHighLight}
+                  value={isLinkHighLight}
+                  className="sr-only peer"
+                  checked={isLinkHighLight}
+                />
+                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-white dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 ">
+                {isLinkHighLight ? "Is High-Light" : "Not High-Light"}
+                </span>
+              </label>                            
               
-
               {/* Zoom Buttons */}
-
-              <div style={{ textAlign: "center", margin: "20px" }}>
+              <div style={{ textAlign: "center", margin: "10px" }}>
                 <button onClick={handleZoomIn} style={{ marginRight: "10px" }}>
                   Zoom In
                 </button>
                 <button onClick={handleZoomOut}>Zoom Out</button>
               </div>
+
+              {/* Saturation Buttons */}
+              {/* <div style={{ textAlign: "center", margin: "10px" }}>
+                <button onClick={handleDecreaseSaturation} style={{ marginRight: "10px" }}>
+
+                Saturation 
+                </button>
+                <button onClick={handleIncreaseSaturation}>Saturation +</button>
+              </div> */}
+              <button onClick={handleSaturation}>Saturation </button>
+
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

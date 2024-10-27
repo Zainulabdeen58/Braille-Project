@@ -6,35 +6,15 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { speakText } from "../Redux/accessibility/index";
 
 const navigation = [
   { name: "About Us", className: "nav-link", to: "/about-us", current: false },
-  {
-    name: "Exhibitions",
-    className: "nav-link",
-    to: "/exhibitions",
-    current: false,
-  },
-  {
-    name: "Art Shop",
-    className: "nav-link",
-    to: "/artwork-shop",
-    current: false,
-  },
-  {
-    name: "3D Prints",
-    className: "nav-link",
-    to: "/3D-prints",
-    current: false,
-  },
-  {
-    name: "Contact Us",
-    className: "nav-link",
-    to: "/contact-us",
-    current: false,
-  },
+  { name: "Exhibitions", className: "nav-link", to: "/exhibitions",current: false},
+  { name: "Art Shop", className: "nav-link", to: "/artwork-shop", current: false},
+  { name: "3D Prints",className: "nav-link", to: "/3D-prints", current: false},
+  { name: "Contact Us", className: "nav-link", to: "/contact-us",current: false },
 ];
 
 function classNames(...classes) {
@@ -42,6 +22,9 @@ function classNames(...classes) {
 }
 function Navbar() {
   const dispatch = useDispatch();
+  const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
+  const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
+  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
 
   return (
       <Disclosure as="nav" className="bg-primary pt-1">
@@ -74,12 +57,18 @@ function Navbar() {
                       to={nav.to}
                       className={classNames(
                         nav.current ? "bg-primary_alt text-secondary" : "text-secondary hover:bg-primary_alt",
-                        "rounded-md px-3 py-2 text-sm lg:text-xl font-medium"
+                        "rounded-md px-3 py-2 font-medium md:text-base",
+                        isTextSize ? " text-lg lg:text-2xl" : "text-sm lg:text-xl",
+                        isTextSpace ? "lg:tracking-widest md:tracking-wide": "",
+                        
+
                       )}
                       onMouseEnter={() => dispatch(speakText(nav.name))}
                       aria-current={nav.current ? "page" : undefined}
                     >
+                      <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
                       {nav.name}
+                      </span>
                     </NavLink>
                   ))}
                 </div>
@@ -99,7 +88,9 @@ function Navbar() {
                 className={classNames(
                   nav.current
                     ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-800 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium"
+                  "block rounded-md px-3 py-2 font-medium",
+                  isTextSize ? " text-lg lg:text-2xl" : "text-base lg:text-xl",
+                  isTextSpace ? "tracking-widest": "",
                 )}
                 onMouseEnter={() => dispatch(speakText(nav.name))}
               >
