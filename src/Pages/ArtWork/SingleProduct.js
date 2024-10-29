@@ -20,6 +20,7 @@ function SingleProduct() {
   const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
   const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
   const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
+  const isLinkHighLight = useSelector((state) => state.accessibility.isLinkHighLight);
     
   const { id } = useParams();
 
@@ -50,7 +51,7 @@ function SingleProduct() {
       >
         <div
           id="product-image"
-          className="w-full md:w-[45%] md:min-h-screen xlg:h-[125vh]"
+          className="w-full md:w-[45%] md:min-h-screen xlg:h-[160vh]"
         >
           <img src={Product.img} alt="product_pic" className="h-full w-full" />
         </div>
@@ -96,7 +97,9 @@ function SingleProduct() {
                 className="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-primary_alt hover:bg-primary text-white"
                 onMouseEnter={() => dispatch(speakText("Checkout"))}
               >
+                <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
                 Checkout
+                </span>
               </NavLink>
             </div>
 

@@ -31,7 +31,7 @@ function ViewCart() {
 
   if (items.length === 0) {
     return (
-      <div className="drawer-end fixed bottom-3 right-4 z-50 ">
+      <div className="drawer-end fixed bottom-3 right-4 z-[120] ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           {/* View Cart Button */}
@@ -48,7 +48,7 @@ function ViewCart() {
         </div>
 
         {/* Page content here */}
-        <div className="drawer-side h-[100%]">
+        <div className="drawer-side h-[100%] z-[100]">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
@@ -97,7 +97,7 @@ function ViewCart() {
 
   
   return (
-    <div className="drawer-end fixed bottom-3 right-4 z-[110] ">
+    <div className="drawer-end fixed bottom-3 right-4 z-40 ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
         {/* View Cart Button */}
@@ -118,7 +118,7 @@ function ViewCart() {
       </div>
 
       {/* Page content here */}
-      <div className="drawer-side h-[100%]">
+      <div className="drawer-side h-[100%] z-[150]">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"

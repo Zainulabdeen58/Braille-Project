@@ -15,6 +15,7 @@ const navigation = [
   { name: "Art Shop", className: "nav-link", to: "/artwork-shop", current: false},
   { name: "3D Prints",className: "nav-link", to: "/3D-prints", current: false},
   { name: "Contact Us", className: "nav-link", to: "/contact-us",current: false },
+  // { name: "try", className: "nav-link", to: "/try",current: false },
 ];
 
 function classNames(...classes) {
@@ -50,23 +51,23 @@ function Navbar() {
             <div className="flex flex-1 items-center justify-end sm:items-stretch sm:justify-center">
               {/* Navbar Larger screen */}
               <div className="hidden sm:block">
-                <div className="flex space-x-1 md:space-x-14 lg:space-x-16">
+                <div className="flex space-x-1 md:space-x-12 lg:space-x-14">
                   {navigation.map((nav) => (
                     <NavLink
                       key={nav.name}
                       to={nav.to}
                       className={classNames(
                         nav.current ? "bg-primary_alt text-secondary" : "text-secondary hover:bg-primary_alt",
-                        "rounded-md px-3 py-2 font-medium md:text-base",
-                        isTextSize ? " text-lg lg:text-2xl" : "text-sm lg:text-xl",
-                        isTextSpace ? "lg:tracking-widest md:tracking-wide": "",
+                        "rounded-md px-3 py-2 font-medium md:text-sm",
+                        isTextSize ?"lg:text-xl" : "lg:text-lg",
+                        isTextSpace? "lg:tracking-widest md:tracking-wide": ""
                         
 
                       )}
                       onMouseEnter={() => dispatch(speakText(nav.name))}
                       aria-current={nav.current ? "page" : undefined}
                     >
-                      <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
+                      <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`} >
                       {nav.name}
                       </span>
                     </NavLink>
@@ -89,7 +90,7 @@ function Navbar() {
                   nav.current
                     ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-800 hover:text-white",
                   "block rounded-md px-3 py-2 font-medium",
-                  isTextSize ? " text-lg lg:text-2xl" : "text-base lg:text-xl",
+                  isTextSize ? " text-lg " : "text-base",
                   isTextSpace ? "tracking-widest": "",
                 )}
                 onMouseEnter={() => dispatch(speakText(nav.name))}
@@ -99,14 +100,6 @@ function Navbar() {
             ))}
           </div>
         </DisclosurePanel>
-        {/* <ul className='flex justify-around list-none text-[100%] bg-primary text-secondary p-5 '>
-            <li><NavLink className="nav-link" to="/about">About Us </NavLink></li>
-            <li><NavLink className="nav-link" to="/exhibitions">Exhibitions </NavLink></li>
-            <li><NavLink className="nav-link" to="/artwork-shop">Art Shop </NavLink></li>
-            <li><NavLink className="nav-link" to="/3D-prints">3D Prints </NavLink></li>
-            <li><NavLink className="nav-link" to="/contact-us">Contact Us </NavLink></li>
-            <li><NavLink className="nav-link" to="/cart"><MdOutlineShoppingBag className='text-xl sm:text-2xl' /></NavLink></li>
-          </ul> */}
       </Disclosure>
       
   );

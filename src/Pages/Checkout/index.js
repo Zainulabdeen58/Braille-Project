@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Header from "../../Components/Header";
 import Navbar from "../../Components/Navbar";
@@ -8,18 +8,14 @@ import { useDispatch } from "react-redux";
 import { speakText } from "../../Redux/accessibility/index";
 
 function Checkout() {
-  
-
   const dispatch = useDispatch();
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
   const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
-  const isLineHeight = useSelector((state)=> state.accessibility.isLineHeight);
   const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
-
-
-
+  const isSaturation = useSelector((state)=> state.accessibility.isSaturation);
   const items = useSelector((state) => state.cart.items);
+
   const subTotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -32,9 +28,15 @@ function Checkout() {
     },
     quantity: item.quantity, // Quantity of the product
   }));
+
   const handleSpeak = (text) => {
     dispatch(speakText(text));
   };
+
+  useEffect(()=>{
+    const Checkout = document.getElementById("Checkout");
+    Checkout.classList.toggle("saturate-200", isSaturation);
+  },[isSaturation])
 
   return (
     <div>
@@ -42,7 +44,7 @@ function Checkout() {
       <Navbar />
       <Accessibility />
       
-      <div className="font-[sans-serif] text-black font-semibold">
+      <div className="font-[sans-serif] text-black font-semibold" id="Checkout">
         <div className="flex max-sm:flex-col h-full">
           {/* Form Section in checkout */}
           <div className="max-w-4xl w-full h-max rounded-md px-9 py-8 relative top-0 lg:min-w-[52%] sm:min-w-[52%]">
@@ -299,7 +301,7 @@ function Checkout() {
                 </div>
 
                 {/* For Shipping */}
-                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} ${isTextSpace? "tracking-widest" : ""} ${isLineHeight? "leading-loose" : ""}`}>
+                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} ${isTextSpace? "tracking-widest" : ""}`}>
                   <span
                     className={`text-primary_alt  `}
                     onMouseEnter={() => handleSpeak("Shipping")}
@@ -326,6 +328,7 @@ function Checkout() {
           </div>
         </div>
       </div>
+     
     </div>
   );
 }

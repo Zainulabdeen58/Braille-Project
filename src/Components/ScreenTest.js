@@ -5,7 +5,7 @@
 // // const MyComponent = () => {
 // //   const dispatch = useDispatch();
 // //   const isSpeechEnabled = useSelector((state)=> state.accessibility.isSpeechEnabled);
-  
+
 // //   const [text, setText] = useState(""); // State to hold current text input
 
 // //   const handleSpeak = (newText) => {
@@ -54,7 +54,6 @@
 // // };
 
 // // export default MyComponent;
-
 
 // import React, { useState } from "react";
 
@@ -184,8 +183,9 @@
 
 // export default ScreenReader;
 
-
-import React,{useState} from "react";
+import React, { useState } from "react";
+import Loader from "./Loader";
+// import Container from "./Container";
 // import { img10 } from "../Assets/Product_images";
 
 // import {
@@ -226,30 +226,32 @@ import React,{useState} from "react";
 //   );
 // };
 
+const ScreenReader = () => {
+  const [cursor, setCursor] = useState("crosshair");
 
-const ScreenReader =()=> {
-  const [cursor, setCursor] = useState('crosshair');
-  
   const changeCursor = () => {
-    setCursor(prevState => {
-      if(prevState === 'crosshair'){
-        return 'pointer';
+    setCursor((prevState) => {
+      if (prevState === "crosshair") {
+        return "pointer";
       }
-      return 'crosshair';
+      return "crosshair";
     });
-  }
+  };
 
   return (
-    <div className="App" style={{ cursor: cursor }}>
-
-      <h2>Click to change mouse cursor</h2>
-      <input  type="button" value="Change cursor" 
-      onClick={changeCursor}
-      style={{ cursor: cursor }}
-
-      />
-    </div>
+    // <div className="w-full flex justify-center h-[200vh] bg-slate-500">
+    //   <div className="App fixed right-72 bottom-72" style={{ cursor: cursor }}>
+    //     <h2>Click to change mouse cursor</h2>
+    //     <input
+    //       type="button"
+    //       value="Change cursor"
+    //       onClick={changeCursor}
+    //       style={{ cursor: cursor }}
+    //     />
+    //   </div>
+    // </div>
+    <Loader/>
   );
-}
+};
 
 export default ScreenReader;

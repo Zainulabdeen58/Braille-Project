@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
 import { useDispatch , useSelector} from "react-redux";
@@ -7,6 +7,8 @@ import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility/index";
 import Container from "../../Components/Container";
+import { BallTriangle } from "react-loader-spinner";
+
 
 function ArtWork() {
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
@@ -48,9 +50,8 @@ function ArtWork() {
   return (
     <>
       <Container>
-        
+      <Suspense fallback={<BallTriangle/>}>
         <section
-           
           id="Projects"
           className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 ${isHighContrast? "font-bold text-black" : "text-gray-400"} ${isTextSpace? "tracking-widest" : ""} ${isLineHeight ? "leading-loose" :  ""}`}
         >
@@ -71,8 +72,7 @@ function ArtWork() {
                     className={`h-80 w-72 object-cover rounded-t-xl ${isLinkHighLight ? "relative":  ""}`}
                     loading="lazy"
                   />
-                  <span className={`${ isLinkHighLight ? "rounded-t-xl bg-yellow-400 absolute top-0 h-80 w-full opacity-30 z-10" : "" }`}>
-                </span>
+                  <span className={`${ isLinkHighLight ? "rounded-t-xl bg-yellow-400 absolute top-0 h-80 w-full opacity-30 z-10" : "" }`}></span>
                 </NavLink>
 
                  {/* Favourite Button */}
@@ -129,6 +129,7 @@ function ArtWork() {
             );
           })}
         </section>
+      </Suspense>
       </Container>
      
     </>
