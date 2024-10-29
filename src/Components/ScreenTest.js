@@ -183,7 +183,7 @@
 
 // export default ScreenReader;
 
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Loader from "./Loader";
 // import Container from "./Container";
 // import { img10 } from "../Assets/Product_images";
