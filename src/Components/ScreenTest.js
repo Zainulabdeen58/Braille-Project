@@ -227,16 +227,16 @@ import Loader from "./Loader";
 // };
 
 const ScreenReader = () => {
-  const [cursor, setCursor] = useState("crosshair");
+  // const [cursor, setCursor] = useState("crosshair");
 
-  const changeCursor = () => {
-    setCursor((prevState) => {
-      if (prevState === "crosshair") {
-        return "pointer";
-      }
-      return "crosshair";
-    });
-  };
+  // const changeCursor = () => {
+  //   setCursor((prevState) => {
+  //     if (prevState === "crosshair") {
+  //       return "pointer";
+  //     }
+  //     return "crosshair";
+  //   });
+  // };
 
   return (
     // <div className="w-full flex justify-center h-[200vh] bg-slate-500">

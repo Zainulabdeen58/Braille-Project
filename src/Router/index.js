@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { Audio } from "react-loader-spinner";
+// import { Audio } from "react-loader-spinner"; need to uninstall
 import Loader from "../Components/Loader/index"
 // import Home from "../Pages/Home/index"; // Assume Home is not lazy-loaded if it’s the main page
 const Home  = lazy(()=> import("../Pages/Home/index"))
