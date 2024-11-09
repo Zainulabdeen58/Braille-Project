@@ -51,17 +51,15 @@ function SingleProduct() {
       >
         <div
           id="product-image"
-          className="w-full md:w-[45%] md:min-h-screen xlg:h-[160vh]"
+          className="w-full md:w-[45%] md:min-h-screen xlg:h-[130vh]"
         >
           <img src={Product.img} alt="product_pic" className="h-full w-full" />
         </div>
-        <div
-          id="product-content"
-          className="w-full min-h-screen my-4 flex justify-center items-center md:w-[55%] md:my-0 "
-        >
-          <div className="block mx-auto w-[80%] text-center md:w-[60%]">
+        <div id="product-content"
+          className="w-full min-h-screen my-4 flex justify-center items-center md:w-[55%] md:my-0">
+          <div className="block mx-auto w-[80%] text-left md:w-[75%] ">
             <h1
-              className={`${isTextSize? "lg:text-6xl text-5xl" : " lg:text-5xl text-4xl"}  font-semibold mb-4  md:mb-7 md:mt-2  ${isTextSpace ? "tracking-widest" : ""}`}
+              className={`font-semibold mb-4  md:mb-7 md:mt-2  ${isTextSpace ? "tracking-wider" : ""} ${isTextSize? "text-2xl md:text-3xl lg:text-4xl" : "text-xl md:text-2xl lg:text-3xl "} ${isHighContrast? "font-semibold" : "font-normal"}`}
               onMouseEnter={() => dispatch(speakText(Product.artist))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >
@@ -69,7 +67,7 @@ function SingleProduct() {
             </h1>
 
             <h5
-              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"} ${isTextSpace ? "tracking-widest" : ""}`}
+              className={`my-3 md:my-4 lg:my-5 ${isTextSize? "text-lg" : "lg:text-base text-sm"} ${isHighContrast? "font-semibold" : "font-normal"} ${isTextSpace ? "tracking-wider" : ""}`}
               onMouseEnter={() =>
                 dispatch(speakText("Painting, Drawing & Works on Paper"))
               }
@@ -77,27 +75,28 @@ function SingleProduct() {
               Painting, Drawing & Works on Paper
             </h5>
             <p
-              className={` my-3 underline italic font-bold ${isTextSize? "text-3xl" : "text-2xl"} ${isTextSpace ? "tracking-widest" : ""} `}
+              className={`my-3 underline italic font-bold ${isHighContrast? "font-semibold" : "font-medium"} ${isTextSize? "text-xl" : "text-lg"} ${isTextSpace ? "tracking-wider" : ""} `}
               onMouseEnter={() => dispatch(speakText("Classic"))}
             >
               Classic
             </p>
 
             <p
-              className={`text-justify ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-bold" : "font-normal"} ${isTextSpace ? "tracking-widest" : ""} ${isLineHeight? " leading-relaxed" : ""} `}
+              className={`text-justify ${isTextSize? "text-lg" : "text-base"} ${isHighContrast? "font-semibold" : "font-normal"} ${isTextSpace ? "tracking-wider" : ""} ${isLineHeight? " leading-relaxed" : ""} `}
               onMouseEnter={() => dispatch(speakText(Product.description))} // Call speakText on focus
               tabIndex={0} // Make it focusable
             >
               {Product.description}
             </p>
 
+              {/* Checkout Button */}
             <div className="flex gap-4 max-md:flex-col mt-6 md:mt-4 lg:mt-6">
               <NavLink
                 to={"/checkout"}
-                className="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-primary_alt hover:bg-primary text-white"
+                className="rounded-md px-6 py-3 w-full text-sm text-center tracking-wide bg-primary_alt hover:bg-primary text-white"
                 onMouseEnter={() => dispatch(speakText("Checkout"))}
               >
-                <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
+                <span className={`${isLinkHighLight ? "text-yellow-500 bg-white" : ""}`}>
                 Checkout
                 </span>
               </NavLink>

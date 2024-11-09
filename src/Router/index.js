@@ -1,8 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-// import { Audio } from "react-loader-spinner"; need to uninstall
 import Loader from "../Components/Loader/index"
-// import Home from "../Pages/Home/index"; // Assume Home is not lazy-loaded if it’s the main page
+import WishList from "../Pages/Wishlist";
 const Home  = lazy(()=> import("../Pages/Home/index"))
 const ArtShop = lazy(() => import("../Pages/ArtWork/index"));
 const SingleProduct = lazy(() => import("../Pages/ArtWork/SingleProduct"));
@@ -12,10 +11,11 @@ const CartContents = lazy(() => import("../Components/ReviewCart"));
 const About = lazy(() => import("../Pages/About/index"));
 const Exhibition = lazy(() => import("../Pages/Exhibition"));
 const Checkout = lazy(() => import("../Pages/Checkout"));
-const ScreenReader = lazy(() => import("../Components/ScreenTest"));
+// const ScreenReader = lazy(() => import("../Components/ScreenTest"));
 
-// Fallback component for lazy loading
-// const Loader = <div>Loading...</div>;
+// import { Audio } from "react-loader-spinner"; need to uninstall
+
+
 
 const Routers = createBrowserRouter([
   {
@@ -23,10 +23,10 @@ const Routers = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/try",
+    path: "/wishlist",
     element: (
       <Suspense fallback={<Loader/>}>
-        <ScreenReader />
+        <WishList />
       </Suspense>
     )
   },

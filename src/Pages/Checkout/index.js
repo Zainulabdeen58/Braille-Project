@@ -12,6 +12,7 @@ function Checkout() {
   const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
   const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
   const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
+  const isLineHeight = useSelector((state)=> state.accessibility.isLineHeight);
   const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
   const isSaturation = useSelector((state)=> state.accessibility.isSaturation);
   const items = useSelector((state) => state.cart.items);
@@ -199,9 +200,11 @@ function Checkout() {
               <div className="px-5 py-6  sm:overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 sm:h-[calc(100vh-60px)]  md:px-7 md:pr-9 md:pb-28">
                 <div className="space-y-4">
                   {items.map((item) => {
+
                     return (
                       <div key={item.id} className="flex items-start gap-4">
-                        <div className={` ${isTextSize? "w-36 h-32": "w-32 h-28"} max-lg:w-24 max-lg:h-24 flex p-2 shrink-0 bg-gray-300 rounded-md justify-center items-center`}>
+                    
+                        <div className={`max-lg:w-28 max-lg:h-28 flex p-2 shrink-0  rounded-md justify-center items-center bg-gray-300 ${isTextSize? "w-36 h-36 ": "w-32 h-32"}`}>
                           <img
                             src={item.img}
                             className="w-full h-full object-cover rounded-md"
@@ -209,12 +212,15 @@ function Checkout() {
                           />
                         </div>
 
-                        <div className={`w-full ${isTextSpace? "tracking-widest" : ""}`}>
-                          <h3 className={`${isTextSize? "text-xl lg:text-2xl " : "text-base lg:text-lg"}`} onMouseEnter={() => handleSpeak(item.artist)} >
+                        <div className={`w-full ${isTextSpace? "tracking-wider" : ""} ${isHighContrast ? "font-semibold" : "font-normal"}`}>
+                        {/* */}
+                        {/* truncate w-44 */}
+                        {/* w-36 sm:w-[10.5rem] lg:w-56 xlg:w-80 */}
+                          <h3 className={`lg:text-lg md:h-12 h-11 overflow-hidden ${isTextSize? "text-base lg:text-lg" : "text-sm lg:text-base"} ${isLineHeight ? "leading-relaxed" : ""}`} onMouseEnter={() => handleSpeak(item.artist)} >
                             {item.artist}
                           </h3>
                           <ul
-                            className={` ${isTextSize? "text-sm lg:text-base " : "text-xs lg:text-sm"}  space-y-2 mt-2 text-gray-600   `}
+                            className={`${isTextSize? "text-xs lg:text-base " : "text-xs lg:text-sm"}  space-y-2 mt-1 text-gray-600   `}
                           >
                             <li className="flex">
                               <span
@@ -235,7 +241,7 @@ function Checkout() {
                                 onMouseEnter={() => handleSpeak("Quantity")}
                               >
                                 
-                                Quantity{" "}
+                                Quantity
                               </span>
                               <span
                                 className="ml-auto"
@@ -301,7 +307,8 @@ function Checkout() {
                 </div>
 
                 {/* For Shipping */}
-                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"} ${isTextSpace? "tracking-widest" : ""}`}>
+                {/*  ${isTextSpace? "tracking-widest" : ""} */}
+                <div className={`flex justify-between mt-2 ${isTextSize? "text-base" : "text-sm"}`}>
                   <span
                     className={`text-primary_alt  `}
                     onMouseEnter={() => handleSpeak("Shipping")}

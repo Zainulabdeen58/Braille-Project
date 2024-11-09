@@ -31,7 +31,7 @@ function ViewCart() {
 
   if (items.length === 0) {
     return (
-      <div className="drawer-end fixed bottom-3 right-4 z-[120] ">
+      <div className="drawer-end fixed bottom-3 right-4 z-[200] ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           {/* View Cart Button */}
@@ -97,7 +97,7 @@ function ViewCart() {
 
   
   return (
-    <div className="drawer-end fixed bottom-3 right-4 z-40 ">
+    <div className="drawer-end fixed bottom-3 right-4 z-[150] ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
         {/* View Cart Button */}
@@ -105,7 +105,7 @@ function ViewCart() {
         <label htmlFor="my-drawer-4" className="drawer-button">
           <div
             role="button"
-            className="btn bg-primary_alt hover:bg-primary pt-1 ml-2 mt-2"
+            className="btn bg-primary_alt hover:bg-primary pt-1 "
           >
             <div className="indicator">
               <MdOutlineShoppingBag className="text-3xl text-secondary" />
@@ -126,7 +126,7 @@ function ViewCart() {
         ></label>
 
         <div className="w-full max-w-xl bg-white shadow-lg relative ml-auto h-full z-[1001]">
-          <div className="overflow-auto p-6 h-[calc(100vh-135px)]">
+          <div className="overflow-auto p-6 h-[calc(100vh-135px)] ">
             <div className="flex items-center gap-4 text-gray-800">
               <h3
                 className={`text-2xl  flex-1 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
@@ -157,9 +157,9 @@ function ViewCart() {
                 <div key={item.id}>
                   <hr className="border-gray-300 my-3" />
 
-                  <div className="grid grid-cols-3 items-start gap-4">
+                  <div className="grid md:grid-cols-3 items-start gap-4">
                     <div className="col-span-2 flex items-start gap-4">
-                      <div className="w-28 h-28 max-sm:w-24 max-sm:h-24 shrink-0 bg-gray-100 p-2 rounded-md">
+                      <div className={`shrink-0 p-2 rounded-md ${isLineHeight? "md:w-32 md:h-32 max-sm:w-28 max-sm:h-28 bg-gray-100" : "max-sm:w-24 max-sm:h-24 md:w-28 md:h-28 bg-gray-100 "}`}>
                         <img
                           alt={item.artist}
                           src={item.img}
@@ -167,23 +167,27 @@ function ViewCart() {
                         />
                       </div>
 
-                      <div className={`flex flex-col  `}>
+                      <div className={`flex flex-col`}>
+                        {/*    */}
                         <h3
-                          className={` ${isTextSize? "text-lg" : "text-base"} max-sm:text-sm ${isHighContrast? "font-extrabold" : "font-bold"}  ${isTextSpace ? "tracking-widest " : ""} text-gray-800`}
+                          className={`font-bold truncate text-balance text-gray-800 ${isLineHeight ? "md:h-12 h-12 leading-relaxed " : "md:h-11 h-11"} ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSize? "text-base" : "text-sm"} ${isTextSpace ? "tracking-wider" : ""}`}
                           onMouseEnter={() => handleSpeak(item.artist)}
                         >
                           {item.artist}
                         </h3>
+                        {/* ${isHighContrast? "font-bold" : "font-semibold"} */}
+                        {/* ${isTextSize? "text-base" : "text-base"} */}
                         <p
-                          className={` ${isTextSize? "text-sm" : "text-xs"} ${isHighContrast? "font-bold" : "font-semibold"} ${isTextSpace ? "tracking-widest " : ""} ${isLineHeight ? "leading-loose" : ""} text-gray-500 mt-0.5`} 
+                          className={`text-base font-semibold  ${isTextSpace ? "tracking-widest " : ""}  text-gray-500 mt-0.5`} 
                           onMouseEnter={() => handleSpeak(item.dimension)}
                         >
                           {item.dimension}
                         </p>
+
                         {/* Remove Button */}
                         <button
                           type="button"
-                          className="mt-6 font-semibold text-red-500 text-xs flex items-center gap-1 shrink-0"
+                          className="mt-3  font-semibold text-red-500 text-xs flex items-center gap-1 shrink-0"
                           onClick={() => {
                             dispatch(removeFromCart({ id: item.id }));
                           }}
@@ -208,7 +212,7 @@ function ViewCart() {
                       </div>
                     </div>
 
-                    <div className="ml-auto">
+                    <div className="col-span-2 flex justify-between items-center md:col-span-1 md:flex-col md:ml-auto ">
                       <h4
                         className={`text-lg max-sm:text-base text-gray-800 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
                         onMouseEnter={() =>
@@ -218,7 +222,7 @@ function ViewCart() {
                         ${parseFloat(item.price * item.quantity).toFixed(2)}
                       </h4>
 
-                      <span className="mt-6 flex items-center px-3 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
+                      <span className="md:mt-6 flex items-center px-3 py-1.5 border border-gray-300 text-gray-800 text-xs outline-none bg-transparent rounded-md">
                         {/* Decrease Button */}
                         <button
                           type="button"
@@ -270,7 +274,7 @@ function ViewCart() {
             })}
           </div>
           
-          <div className={`p-6 absolute bottom-0 w-full border-t bg-white ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-extrabold" : " font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}>
+          <div className={`py-3 px-6 absolute bottom-0 w-full border-t bg-white ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-extrabold" : " font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}>
             <ul className="text-gray-800 divide-y">
               <li className="flex flex-wrap gap-4 ">
                 <span onMouseEnter={() => handleSpeak("Subtotal")}>

@@ -1,34 +1,41 @@
-import React, { useState, Suspense } from "react";
+import React from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
-import { useDispatch , useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../Redux/cartslice";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility/index";
+import { addfavourite } from "../../Redux/favouritelistslice";
 import Container from "../../Components/Container";
-import { BallTriangle } from "react-loader-spinner";
-
 
 function ArtWork() {
-  const isHighContrast = useSelector((state)=> state.accessibility.isHighContrast);
-  const isTextSize = useSelector((state)=> state.accessibility.isTextSize);
-  const isTextSpace = useSelector((state)=> state.accessibility.isTextSpace);
-  const isLineHeight = useSelector((state)=> state.accessibility.isLineHeight);
-  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
+  const isHighContrast = useSelector(
+    (state) => state.accessibility.isHighContrast
+  );
+  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
+  const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
+  const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
+  const isLinkHighLight = useSelector(
+    (state) => state.accessibility.isLinkHighLight
+  );
 
+  const favouriteItems = useSelector((state) => state.FavouriteList.items);
 
-  const [isFavorited, setIsFavorited] = useState(false);
+  // const [isFavorited, setIsFavorited] = useState(false);
   const dispatch = useDispatch();
 
-  const toggleFavorite = (id) => {
-    setIsFavorited((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id], // Toggle the state for the clicked item
-    }));
+  // const toggleFavorite = (id) => {
+  //   setIsFavorited((prevState) => ({
+  //     ...prevState,
+  //     [id]: !prevState[id], // Toggle the state for the clicked item
+  //   }));
+  // };
+
+  const handleFavourite = (item) => {
+    dispatch(addfavourite(item));
   };
 
-  
   const handleAddToCart = (user) => {
     dispatch(addToCart(user));
     console.log(user);
@@ -43,20 +50,24 @@ function ArtWork() {
       theme: "light",
     });
   };
- 
-  const handleSpeak =(text)=>{    
-    dispatch(speakText(text))
-  }
+
+  const handleSpeak = (text) => {
+    dispatch(speakText(text));
+  };
   return (
     <>
       <Container>
-      <Suspense fallback={<BallTriangle/>}>
         <section
           id="Projects"
-          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 ${isHighContrast? "font-bold text-black" : "text-gray-400"} ${isTextSpace? "tracking-widest" : ""} ${isLineHeight ? "leading-loose" :  ""}`}
+          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 
+            ${isTextSpace ? "tracking-widest" : ""} 
+            ${isLineHeight ? "leading-loose" : "" } 
+            ${isHighContrast ? "font-bold text-black" : "font-medium text-gray-400"}`}
         >
           {/* Card Image Section */}
           {Data.map((product) => {
+            // Check it is present in wishlist or not
+            const isFavourite = favouriteItems.some((fav) => fav.id === product.id);
             return (
               <div
                 key={product.id}
@@ -65,51 +76,87 @@ function ArtWork() {
                 {/* Card Image */}
 
                 <NavLink to={`/artwork-shop/${product.id}`}>
-                
                   <img
                     src={product.img}
                     alt="Product"
-                    className={`h-80 w-72 object-cover rounded-t-xl ${isLinkHighLight ? "relative":  ""}`}
+                    className={`h-80 w-72 object-cover rounded-t-xl ${
+                      isLinkHighLight ? "relative" : ""
+                    }`}
                     loading="lazy"
                   />
-                  <span className={`${ isLinkHighLight ? "rounded-t-xl bg-yellow-400 absolute top-0 h-80 w-full opacity-30 z-10" : "" }`}></span>
+                  <span
+                    className={`${
+                      isLinkHighLight
+                        ? "rounded-t-xl bg-yellow-400 absolute top-0 h-80 w-full opacity-30 z-10"
+                        : ""
+                    }`}
+                  ></span>
                 </NavLink>
 
-                 {/* Favourite Button */}
+                {/* Favourite Button */}
                 <button
-                  aria-label={
-                    isFavorited[product.id] ? "Unfavorite" : "Favorite"
-                  }
-                  onClick={() => toggleFavorite(product.id)}
+                  aria-label={isFavourite ? "Unfavorite" : "Favorite"}
+                  onClick={() => handleFavourite(product)}
+                  className="absolute top-2 right-2 z-50  cursor-pointer"
+                >
+                  <FaHeart
+                    className={`text-2xl transition-colors duration-300 ${
+                      isFavourite ? "text-red-500" : "text-white"
+                    }`}
+                  />
+                </button>
+                {/* <button
+                  aria-label={isFavourite ? "Unfavorite" : "Favorite"}
+                  onClick={() => handleFavourite(product)}
                   className="absolute top-2 right-2 z-50 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
                 >
                   <FaHeart
                     className={`text-2xl transition-colors duration-300 ${
-                      isFavorited[product.id] ? "text-red-500" : "text-white"
+                      isFavourite ? "text-red-500" : "text-white"
                     }`}
                   />
-                </button>
+                </button> */}
 
                 {/* Card Content section */}
-                <div className="px-4 py-3 w-72 lg:w-56 xlg:w-64 2xlg:w-72">
-                  <span className={` mr-3 uppercase  ${isTextSize? "text-[0.9rem]" : "text-xs"}`} onMouseEnter={()=> handleSpeak(product.dimension)}>
-                    {product.dimension}
-                  </span>
-                  <span className={`font-bold text-black truncate block capitalize ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(product.artist)}>
+                <div className="px-4 py-3 w-72 h-36 lg:w-56 xlg:w-64 2xlg:w-72">
+                  <div className="flex justify-between items-center">
+                    <span
+                      className={`mr-3 uppercase ${
+                        isTextSize ? "text-[0.9rem]" : "text-xs"
+                      }`}
+                      onMouseEnter={() => handleSpeak(product.dimension)}
+                    >
+                      {product.dimension}
+                    </span>
+
+                    <span
+                      className={`font-semibold text-black cursor-auto my-1 ${
+                        isTextSize ? "text-xl" : "text-lg"
+                      }`}
+                      onMouseEnter={() => handleSpeak(`$ ${product.price}`)}
+                    >
+                      ${product.price}
+                    </span>
+
+                  </div>
+
+                  <span
+                    className={`text-black h-14 overflow-hidden block capitalize ${
+                      isTextSize ? "text-xl" : "text-lg"
+                    }`}
+                    onMouseEnter={() => handleSpeak(product.artist)}
+                  >
                     {product.artist}
                   </span>
                   <div className="flex items-center">
-                  <span className={`font-semibold text-black cursor-auto my-3 ${isTextSize? "text-xl" : "text-lg"}`} onMouseEnter={()=> handleSpeak(`$ ${product.price}`)}>
-                      ${product.price}
-                    </span>
                     {/* Icon Add to Cart */}
                     <div className="ml-auto">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
+                        width="25"
+                        height="25"
                         fill="currentColor"
-                        className="bi bi-bag-plus cursor-pointer"
+                        className="bi bi-bag-plus cursor-pointer  hover:text-black  absolute bottom-4 right-5"
                         viewBox="0 0 16 16"
                         onClick={() => {
                           handleAddToCart(product);
@@ -123,15 +170,13 @@ function ArtWork() {
                       </svg>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             );
           })}
         </section>
-      </Suspense>
+        
       </Container>
-     
     </>
   );
 }

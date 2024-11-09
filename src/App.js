@@ -7,18 +7,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { RouterProvider } from "react-router-dom";
 import { Routers } from "./Router";
-// import { BallTriangle } from "react-loader-spinner";
 
 export default function App() {
   return (
     <React.StrictMode>
       <PayPalScriptProvider options={{ "client-id": process.env.Client_ID }}>
         <Provider store={store}>
-          {/* <Suspense fallback={<BallTriangle/>}> */}
             <RouterProvider router={Routers} />
            
-          {/* </Suspense> */}
-          <ToastContainer />
+            <ToastContainer />
         </Provider>
       </PayPalScriptProvider>
     </React.StrictMode>
