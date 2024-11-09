@@ -32,15 +32,6 @@ function Home() {
               className="w-full h-full object-fit transition-transform duration-300 ease-in-out"
             />
           </div>
-
-          {/* <div className="col-start-4 col-end-8 row-start-4 row-end-7 relative overflow-hidden z-10">
-            <img
-              src={Image.Sample_3}
-              alt="Artwork 3"
-              className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
-            />
-          </div> */}
-{/*  */}
           
           <div className="col-start-8 col-end-12 row-start-1 row-end-9 relative overflow-hidden">
             <img

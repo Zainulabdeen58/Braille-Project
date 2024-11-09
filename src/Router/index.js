@@ -7,10 +7,10 @@ const ArtShop = lazy(() => import("../Pages/ArtWork/index"));
 const SingleProduct = lazy(() => import("../Pages/ArtWork/SingleProduct"));
 const Print3D = lazy(() => import("../Pages/Print3D/index"));
 const Print3DSingleProduct = lazy(() => import("../Pages/Print3D/SingleProduct"));
-const CartContents = lazy(() => import("../Components/ReviewCart"));
 const About = lazy(() => import("../Pages/About/index"));
 const Exhibition = lazy(() => import("../Pages/Exhibition"));
 const Checkout = lazy(() => import("../Pages/Checkout"));
+// const CartContents = lazy(() => import("../Components/ReviewCart"));
 // const ScreenReader = lazy(() => import("../Components/ScreenTest"));
 
 // import { Audio } from "react-loader-spinner"; need to uninstall
@@ -34,7 +34,7 @@ const Routers = createBrowserRouter([
     path: "/about-us",
     element: (
       <Suspense fallback={<Loader/>}>
-        <About />
+       <About />
       </Suspense>
     )
   },
@@ -80,13 +80,17 @@ const Routers = createBrowserRouter([
   },
   {
     path: "/contact-us",
-    element: <Home />
+    element: (
+      <Suspense fallback={<Loader/>}>
+        <Home />
+      </Suspense>
+    )
   },
   {
     path: "/view-cart",
     element: (
       <Suspense fallback={<Loader/>}>
-        <CartContents />
+        <Home />
       </Suspense>
     )
   },
