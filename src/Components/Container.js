@@ -34,6 +34,7 @@ import CartDrawer from "./cartDrawer";
 import Accessibility from "./Accessibility";
 import { useSelector } from "react-redux";
 import SocialBar from "./SocialBar";
+import Footer from "./Footer";
 
 
 function Container({ children }) {
@@ -52,6 +53,7 @@ function Container({ children }) {
       <CartDrawer />
       <Accessibility />
         <div id="Main">{children}</div>
+        <Footer/>
     </div>
   );
 }

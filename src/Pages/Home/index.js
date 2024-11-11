@@ -1,7 +1,7 @@
 import React from "react";
 import * as Image from "../../Assets/artist-data";
 import Container from "../../Components/Container";
-import Footer from "../../Components/Footer";
+
 
 function Home() {
   return (
@@ -69,7 +69,6 @@ function Home() {
 
         </div>
       </div>
-      <Footer/>
     </Container>
   );
 }

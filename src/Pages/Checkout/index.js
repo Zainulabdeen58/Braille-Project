@@ -6,6 +6,7 @@ import Accessibility from "../../Components/Accessibility";
 import PaypalCheckoutButton from "../../Components/PaypalCheckoutButton";
 import { useDispatch } from "react-redux";
 import { speakText } from "../../Redux/accessibility/index";
+import Footer from "../../Components/Footer";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -335,6 +336,8 @@ function Checkout() {
           </div>
         </div>
       </div>
+      
+      <Footer/>
      
     </div>
   );

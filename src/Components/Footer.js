@@ -199,7 +199,7 @@ import { TbBrandYoutubeFilled } from "react-icons/tb";
 function Footer() {
   return (
     <div>
-      <footer className="grid md:grid-cols-4 mt-2 bg-primary text-secondary lg:py-6">
+      <footer className="grid md:grid-cols-4 mt-3 bg-primary text-secondary lg:py-6">
 
         <aside className="px-7 pt-3 flex justify-center items-start md:col-span-2 lg:col-span-1">
           <img src={Logo} alt="Logo" />
