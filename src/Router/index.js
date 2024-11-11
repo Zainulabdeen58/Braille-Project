@@ -10,7 +10,7 @@ const Print3DSingleProduct = lazy(() => import("../Pages/Print3D/SingleProduct")
 const About = lazy(() => import("../Pages/About/index"));
 const Exhibition = lazy(() => import("../Pages/Exhibition"));
 const Checkout = lazy(() => import("../Pages/Checkout"));
-// const CartContents = lazy(() => import("../Components/ReviewCart"));
+const Cart = lazy(() => import("../Pages/Cart"));
 // const ScreenReader = lazy(() => import("../Components/ScreenTest"));
 
 // import { Audio } from "react-loader-spinner"; need to uninstall
@@ -87,10 +87,10 @@ const Routers = createBrowserRouter([
     )
   },
   {
-    path: "/view-cart",
+    path: "/cart",
     element: (
       <Suspense fallback={<Loader/>}>
-        <Home />
+        <Cart />
       </Suspense>
     )
   },

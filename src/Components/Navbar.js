@@ -15,6 +15,14 @@ const navigation = [
   { name: "Art Shop", className: "nav-link", to: "/artwork-shop", current: false},
   { name: "3D Prints",className: "nav-link", to: "/3D-prints", current: false},
   { name: "Contact Us", className: "nav-link", to: "/contact-us",current: false },
+];
+
+const smNavigation = [
+  { name: "About Us", className: "nav-link", to: "/about-us", current: false },
+  { name: "Exhibitions", className: "nav-link", to: "/exhibitions",current: false},
+  { name: "Art Shop", className: "nav-link", to: "/artwork-shop", current: false},
+  { name: "3D Prints",className: "nav-link", to: "/3D-prints", current: false},
+  { name: "Contact Us", className: "nav-link", to: "/contact-us",current: false },
   { name: "Wishlist", className: "nav-link", to: "/wishlist",current: false },
 ];
 
@@ -28,11 +36,11 @@ function Navbar() {
   const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
 
   return (
-      <Disclosure as="nav" className="bg-primary pt-1">
+      <Disclosure as="nav" className="bg-primary">
         <div className="mx-auto max-w-full px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-12 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button */}
+              
               <DisclosureButton
                 className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                 aria-label="Toggle navigation menu"
@@ -81,7 +89,7 @@ function Navbar() {
         {/* Hamburger menu for small screen */}
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            {navigation.map((nav) => (
+            {smNavigation.map((nav) => (
               <NavLink
                 key={nav.name}
                 to={nav.to}

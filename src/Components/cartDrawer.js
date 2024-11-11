@@ -10,7 +10,7 @@ import { BiSolidShoppingBags  } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { speakText } from "../Redux/accessibility";
 
-function ViewCart() {
+function CartDrawer() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items); // Adjust according to your state structure
   const isTextSize = useSelector((state) => state.accessibility.isTextSize);
@@ -175,8 +175,7 @@ function ViewCart() {
                         >
                           {item.artist}
                         </h3>
-                        {/* ${isHighContrast? "font-bold" : "font-semibold"} */}
-                        {/* ${isTextSize? "text-base" : "text-base"} */}
+                        
                         <p
                           className={`text-base font-semibold  ${isTextSpace ? "tracking-widest " : ""}  text-gray-500 mt-0.5`} 
                           onMouseEnter={() => handleSpeak(item.dimension)}
@@ -309,4 +308,4 @@ function ViewCart() {
   );
 }
 
-export default ViewCart;
+export default CartDrawer;

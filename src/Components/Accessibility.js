@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MdAccessibility, MdTextFields, MdZoomInMap } from "react-icons/md";
 import { RiTextSpacing, RiVoiceprintFill } from "react-icons/ri";
-import { LuMousePointer2 } from "react-icons/lu";
+// import { LuMousePointer2 } from "react-icons/lu";
 import { MdContrast } from "react-icons/md";
 import { CgDropInvert } from "react-icons/cg";
 import {
@@ -11,7 +11,7 @@ import {
   speakText,
   toggleHighContrast,
   toggleTextSize,
-  toggleCursorSize,
+  // toggleCursorSize,
   toggleFontStyle,
   toggleLineHeight,
   toggleTextSpacing,
@@ -21,7 +21,7 @@ import {
 } from "../Redux/accessibility/index";
 import { FaItalic, FaLink, FaTextHeight } from "react-icons/fa";
 
-function Accessibility() {
+const Accessibility = ()=> {
   const dispatch = useDispatch();
 
   const {
@@ -75,9 +75,9 @@ function Accessibility() {
     dispatch(toggleTextSize());
   };
 
-  const handleCursorSize = () => {
-    dispatch(toggleCursorSize());
-  };
+  // const handleCursorSize = () => {
+  //   dispatch(toggleCursorSize());
+  // };
 
   const handleFontStyle = () => {
     dispatch(toggleFontStyle());
@@ -358,14 +358,14 @@ function Accessibility() {
                 </p>
               </div>
 
-              {/* Cursor Size Button */}
-              <div
+              {/* Cursor Size Button ********** Image Issue*/}
+              {/* <div
                 className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
                   isCursorSize ? "border-black" : ""
                 }`}
                 onClick={handleCursorSize}
               >
-                {/* Checked Button */}
+                Checked Button *********
                 <div class="absolute top-1 right-1 w-5 h-3">
                   <label class="flex items-center cursor-pointer relative">
                     <input
@@ -397,7 +397,7 @@ function Accessibility() {
                 <p className="font-bold text-base">
                   {isCursorSize ? "Big Cursor" : "Normal Cursor"}
                 </p>
-              </div>
+              </div> */}
 
               {/* Line Height Button */}
               <div

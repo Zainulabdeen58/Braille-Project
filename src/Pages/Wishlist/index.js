@@ -57,12 +57,13 @@ function WishList() {
           return (
             <div className="grid md:grid-cols-5  items-center gap-4 py-4">
               <div className="col-span-3 flex items-center gap-6 ">
-                <div className="w-28 h-28 shrink-0">
+                <div className="w-28 h-28 shrink-0 md:w-32 md:h-32">
                   <img src={item.img} className="w-full h-full object-contain" alt={item.artist} />
                 </div>
 
                 <div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-800" onMouseEnter={()=> handleSpeak(item.artist)}>
+                  <h3 className="text-base md:text-lg font-bold text-gray-800 h-12 md:h-14 overflow-hidden"
+                   onMouseEnter={()=> handleSpeak(item.artist)}>
                     {item.artist}
                   </h3>
                   <h6 className="text-sm  text-gray-500 mt-1">{item.dimension}</h6>

@@ -30,9 +30,10 @@
 import React, { useEffect } from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import ViewCart from "./ViewCart";
+import CartDrawer from "./cartDrawer";
 import Accessibility from "./Accessibility";
 import { useSelector } from "react-redux";
+import SocialBar from "./SocialBar";
 
 
 function Container({ children }) {
@@ -45,15 +46,12 @@ function Container({ children }) {
 
   return (
     <div>
+      <SocialBar/>
       <Header />
       <Navbar />
-      <ViewCart />
+      <CartDrawer />
       <Accessibility />
-      
-      {/* Lazy loading the children */}
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
         <div id="Main">{children}</div>
-      {/* </Suspense> */}
     </div>
   );
 }

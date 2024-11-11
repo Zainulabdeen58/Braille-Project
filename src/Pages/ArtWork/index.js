@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility/index";
 import { addfavourite } from "../../Redux/favouritelistslice";
 import Container from "../../Components/Container";
+import Footer from "../../Components/Footer";
 
 function ArtWork() {
   const isHighContrast = useSelector(
@@ -175,6 +176,7 @@ function ArtWork() {
             );
           })}
         </section>
+        {/* <Footer/> */}
         
       </Container>
     </>

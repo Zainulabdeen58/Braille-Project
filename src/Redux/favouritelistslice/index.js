@@ -23,7 +23,7 @@ const FavouriteListSlice = createSlice({
       localStorage.setItem("FavouriteItems", JSON.stringify(state.items));
     },
     removefavourite: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       
       // Remove the item and set `isFavourite` to false
       state.items = state.items.filter(item => item.id !== action.payload.id);
