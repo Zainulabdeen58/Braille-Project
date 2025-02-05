@@ -561,5 +561,18 @@
 // }
 
 // export default ScreenReader;
+import React from 'react'
+import Loader from './Loader'
+
+function ScreenTest() {
+  return (
+    <div>
+      <Loader/>
+    </div>
+  )
+}
+
+export default ScreenTest
+
 
 

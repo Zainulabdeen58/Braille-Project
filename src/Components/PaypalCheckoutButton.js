@@ -33,8 +33,50 @@ function PaypalCheckoutButton(props) {
     <PayPalScriptProvider>
       
         <PayPalButtons
+        fundingSource="paypal" // Only show the PayPal button, exclude Venmo
           style={style}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  description: products.description,
+                  amount: {
+                    currency_code : "USD",
+                    value: subTotal,
+                    breakdown:{
+                      item_total:{
+                        currency_code: "USD",
+                        value: subTotal,
+                      },
+                    },
+                  },
+                  items : products,
+                },
+              ],
+            });
+          }}
 
+          onApprove={async (data, actions) => {
+            const order = await actions.order.capture();
+            console.log("Order capture", order);
+
+            console.log("data.orderID", data.orderID);
+            handleApprove(data.id);  // Mark the product as approved
+          }}
+
+          onCancel={() => {
+            toast.success("Payment was cancelled.");
+          }}
+
+          onError={(err) => {
+            setError(err);
+            console.log("PayPal checkout error", err);
+          }}
+
+        />
+        <PayPalButtons
+        fundingSource="card" // Only show the PayPal button, exclude Venmo
+          style={style}
           createOrder={(data, actions) => {
             return actions.order.create({
               purchase_units: [

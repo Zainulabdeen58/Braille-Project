@@ -23,15 +23,9 @@ function ArtWork() {
 
   const favouriteItems = useSelector((state) => state.FavouriteList.items);
 
-  // const [isFavorited, setIsFavorited] = useState(false);
   const dispatch = useDispatch();
 
-  // const toggleFavorite = (id) => {
-  //   setIsFavorited((prevState) => ({
-  //     ...prevState,
-  //     [id]: !prevState[id], // Toggle the state for the clicked item
-  //   }));
-  // };
+ 
 
   const handleFavourite = (item) => {
     dispatch(addfavourite(item));
@@ -55,6 +49,7 @@ function ArtWork() {
   const handleSpeak = (text) => {
     dispatch(speakText(text));
   };
+  
   return (
     <>
       <Container>
@@ -108,17 +103,6 @@ function ArtWork() {
                     }`}
                   />
                 </button>
-                {/* <button
-                  aria-label={isFavourite ? "Unfavorite" : "Favorite"}
-                  onClick={() => handleFavourite(product)}
-                  className="absolute top-2 right-2 z-50 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
-                >
-                  <FaHeart
-                    className={`text-2xl transition-colors duration-300 ${
-                      isFavourite ? "text-red-500" : "text-white"
-                    }`}
-                  />
-                </button> */}
 
                 {/* Card Content section */}
                 <div className="px-4 py-3 w-72 h-36 lg:w-56 xlg:w-64 2xlg:w-72">

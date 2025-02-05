@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,10 @@ import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility/index";
 import { addfavourite } from "../../Redux/favouritelistslice";
 import Container from "../../Components/Container";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ArtWork() {
   const isHighContrast = useSelector(
@@ -21,16 +25,33 @@ function ArtWork() {
   );
 
   const favouriteItems = useSelector((state) => state.FavouriteList.items);
-
-  // const [isFavorited, setIsFavorited] = useState(false);
   const dispatch = useDispatch();
+  const cardsRef = useRef([]);  
 
-  // const toggleFavorite = (id) => {
-  //   setIsFavorited((prevState) => ({
-  //     ...prevState,
-  //     [id]: !prevState[id], // Toggle the state for the clicked item
-  //   }));
-  // };
+
+  // Gsap animation code
+  // useEffect(() => {
+
+  //   gsap.fromTo(
+  //     cardsRef.current,
+  //     { opacity: 0, y: 50 },
+  //     {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 1,
+  //       stagger: 0.2, 
+  //       ease: "power3.out",
+  //       scrollTrigger: {
+  //         trigger: "#Projects",
+  //         markers:true,
+  //         start: "top 70%", 
+  //         end:   "bottom top", 
+  //         scrub: true,
+  //         toggleActions: "play none none reverse",
+  //       },
+  //     }
+  //   );
+  // }, []);
 
   const handleFavourite = (item) => {
     dispatch(addfavourite(item));
@@ -38,43 +59,40 @@ function ArtWork() {
 
   const handleAddToCart = (user) => {
     dispatch(addToCart(user));
-    console.log(user);
-    toast.success("Item Add", {
+    toast.success("Item Added", {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
-      theme: "light",
     });
   };
 
   const handleSpeak = (text) => {
-    dispatch(speakText(text));
+    useDispatch(speakText(text));
   };
+
   return (
     <>
       <Container>
-        <section
-          id="Projects"
-          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14  md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 
+        <section 
+          id="Projects "
+          className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14 md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 
             ${isTextSpace ? "tracking-widest" : ""} 
-            ${isLineHeight ? "leading-loose" : "" } 
+            ${isLineHeight ? "leading-loose" : ""} 
             ${isHighContrast ? "font-bold text-black" : "font-medium text-gray-400"}`}
         >
-          {/* Card Image Section */}
-          {Data.map((product) => {
-            // Check it is present in wishlist or not
-            const isFavourite = favouriteItems.some((fav) => fav.id === product.id);
+          {Data.map((product, index) => {
+            const isFavourite = favouriteItems.some(
+              (fav) => fav.id === product.id
+            );
             return (
               <div
                 key={product.id}
-                className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl lg:w-56 xlg:w-64 2xlg:w-72"
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="relative w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl lg:w-56 xlg:w-64 2xlg:w-72 "
               >
-                {/* Card Image */}
-
                 <NavLink to={`/artwork-shop/${product.id}`}>
                   <img
                     src={product.img}
@@ -84,6 +102,8 @@ function ArtWork() {
                     }`}
                     loading="lazy"
                   />
+                  
+                  {/* HighLight Accessibility  */}
                   <span
                     className={`${
                       isLinkHighLight
@@ -93,11 +113,10 @@ function ArtWork() {
                   ></span>
                 </NavLink>
 
-                {/* Favourite Button */}
                 <button
                   aria-label={isFavourite ? "Unfavorite" : "Favorite"}
                   onClick={() => handleFavourite(product)}
-                  className="absolute top-2 right-2 z-50  cursor-pointer"
+                  className="absolute top-2 right-2 z-50 cursor-pointer"
                 >
                   <FaHeart
                     className={`text-2xl transition-colors duration-300 ${
@@ -105,19 +124,7 @@ function ArtWork() {
                     }`}
                   />
                 </button>
-                {/* <button
-                  aria-label={isFavourite ? "Unfavorite" : "Favorite"}
-                  onClick={() => handleFavourite(product)}
-                  className="absolute top-2 right-2 z-50 opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100 group-hover:opacity-100"
-                >
-                  <FaHeart
-                    className={`text-2xl transition-colors duration-300 ${
-                      isFavourite ? "text-red-500" : "text-white"
-                    }`}
-                  />
-                </button> */}
 
-                {/* Card Content section */}
                 <div className="px-4 py-3 w-72 h-36 lg:w-56 xlg:w-64 2xlg:w-72">
                   <div className="flex justify-between items-center">
                     <span
@@ -137,7 +144,6 @@ function ArtWork() {
                     >
                       ${product.price}
                     </span>
-
                   </div>
 
                   <span
@@ -148,15 +154,15 @@ function ArtWork() {
                   >
                     {product.artist}
                   </span>
+
                   <div className="flex items-center">
-                    {/* Icon Add to Cart */}
                     <div className="ml-auto">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="25"
                         height="25"
                         fill="currentColor"
-                        className="bi bi-bag-plus cursor-pointer  hover:text-black  absolute bottom-4 right-5"
+                        className="bi bi-bag-plus cursor-pointer hover:text-black absolute bottom-4 right-5"
                         viewBox="0 0 16 16"
                         onClick={() => {
                           handleAddToCart(product);
@@ -175,7 +181,6 @@ function ArtWork() {
             );
           })}
         </section>
-        
       </Container>
     </>
   );

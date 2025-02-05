@@ -206,21 +206,21 @@ function Footer() {
         </aside>
 
         <nav className="flex flex-col leading-8 py-3 px-10 text-sm md:px-3 md:col-span-2 lg:col-span-1 ">
-          <heading className="footer-title text-base ">Get In Touch</heading>
+          <div className="footer-title text-base ">Get In Touch</div>
           <NavLink to={""}>Phone: +1 (0) 000 0000 001</NavLink>
           <NavLink to={""}>Email: yourmail@example.com</NavLink>
           <NavLink to={""}>Address:1234 Street Name City, AA 99999</NavLink>
         </nav>
         <nav className="flex flex-col leading-7 p-3 px-10 text-sm md:col-span-2 lg:col-span-1 md:text-center lg:text-left">
-          <heading className="footer-title  text-base">Pages</heading>
-          <NavLink to={""} >Home</NavLink>
-          <NavLink to={""}>About Us</NavLink>
-          <NavLink to={""}>Exhibition</NavLink>
-          <NavLink to={""}>ArtShop</NavLink>
+          <div className="footer-title  text-base">Pages</div>
+          <NavLink to={"/"} >Home</NavLink>
+          <NavLink to={"/about-us"}>About Us</NavLink>
+          <NavLink to={"/exhibitions"}>Exhibitions</NavLink>
+          <NavLink to={"/artwork-shop"}>ArtShop</NavLink>
         </nav>
 
         <div className="w-full pt-1 px-10 md:px-3 lg:pr-2 flex flex-col justify-center items-left md:col-span-2 lg:col-span-1">
-          <heading className="footer-title">News Letter</heading>
+          <div className="footer-title">News Letter</div>
           <input
             type="text"
             placeholder="Enter Your Email"

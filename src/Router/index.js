@@ -11,9 +11,7 @@ const About = lazy(() => import("../Pages/About/index"));
 const Exhibition = lazy(() => import("../Pages/Exhibition"));
 const Checkout = lazy(() => import("../Pages/Checkout"));
 const Cart = lazy(() => import("../Pages/Cart"));
-// const ScreenReader = lazy(() => import("../Components/ScreenTest"));
-
-// import { Audio } from "react-loader-spinner"; need to uninstall
+const ScreenReader = lazy(() => import("../Components/ScreenTest"));
 
 
 
@@ -100,6 +98,14 @@ const Routers = createBrowserRouter([
       <Suspense fallback={<Loader/>}>
         <Checkout />
       </Suspense>
+    )
+  },
+  {
+    path: "/test",
+    element: (
+      
+        <ScreenReader />
+      
     )
   }
 ]);

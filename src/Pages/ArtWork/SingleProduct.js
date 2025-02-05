@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useParams } from "react-router-dom";
 import Data from "../../API/artworkdata";
 import Container from "../../Components/Container";
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { speakText } from "../../Redux/accessibility";
 
 function SingleProduct() {
+  
   const dispatch = useDispatch();
   const Items = useSelector((state) => state.cart.items);
   const isTextSize = useSelector((state) => state.accessibility.isTextSize);
@@ -45,7 +46,7 @@ function SingleProduct() {
 
   return (
     <Container>
-      <div
+      <div 
         id="product-container"
         className="bg-secondary w-full flex mt-1 flex-col md:flex-row"
       >
