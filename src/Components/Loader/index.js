@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./style.css";
 import logo from "../../Assets/Image/logo_30.png";
-import Navbar from "../Navbar";
+// import Navbar from "../Navbar";
 
 function Loader() {
   // const [percentage, setPercentage] = useState(0);
