@@ -70,7 +70,7 @@ function ArtWork() {
   };
 
   const handleSpeak = (text) => {
-    useDispatch(speakText(text));
+    dispatch(speakText(text));
   };
 
   return (
