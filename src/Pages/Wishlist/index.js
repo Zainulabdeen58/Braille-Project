@@ -12,7 +12,7 @@ import Container from "../../Components/Container";
 function WishList() {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.FavouriteList.items);
-  const isTextSize = useSelector((state)=> state.accessi)
+  // const isTextSize = useSelector((state)=> state.accessi)
 
   const handleSpeak = (text) => {
     dispatch(speakText(text));

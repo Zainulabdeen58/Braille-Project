@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Data from "../../API/artworkdata";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
