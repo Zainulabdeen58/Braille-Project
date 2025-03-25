@@ -563,11 +563,15 @@
 // export default ScreenReader;
 import React from 'react'
 import Loader from './Loader'
+import Container from './Container'
 
 function ScreenTest() {
   return (
     <div>
+      <Container>
+
       <Loader/>
+      </Container>
     </div>
   )
 }

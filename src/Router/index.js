@@ -103,8 +103,9 @@ const Routers = createBrowserRouter([
   {
     path: "/test",
     element: (
-      
+      <Suspense fallback={<Loader/>}>
         <ScreenReader />
+      </Suspense>
       
     )
   }
