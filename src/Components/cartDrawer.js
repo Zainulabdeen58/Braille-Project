@@ -6,20 +6,20 @@ import {
   decreaseQuantity,
 } from "../Redux/cartslice/index";
 import { MdOutlineShoppingBag } from "react-icons/md";
-import { BiSolidShoppingBags  } from "react-icons/bi";
+import { BiSolidShoppingBags } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { speakText } from "../Redux/accessibility";
 
 function CartDrawer() {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items); // Adjust according to your state structure
-  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
-  const isHighContrast = useSelector((state) => state.accessibility.isHighContrast);
-  const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
-  const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
-  const isLinkHighLight = useSelector((state)=> state.accessibility.isLinkHighLight);
-
-
+  const {
+    isTextSize,
+    isHighContrast,
+    isLineHeight,
+    isTextSpace,
+    isLinkHighLight,
+  } = useSelector((state) => state.accessibility);
+  const items = useSelector((state) => state.cart.items);
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -82,9 +82,8 @@ function CartDrawer() {
                 </label>
               </div>
               <div className="flex flex-col justify-center items-center h-[90%]">
-              <BiSolidShoppingBags  className="text-9xl"/>
-              <h1 className="font-bold mt-3 text-2xl" >Cart Is Empty</h1>
-
+                <BiSolidShoppingBags className="text-9xl" />
+                <h1 className="font-bold mt-3 text-2xl">Cart Is Empty</h1>
               </div>
             </div>
           </div>
@@ -95,7 +94,6 @@ function CartDrawer() {
     );
   }
 
-  
   return (
     <div className="drawer-end fixed bottom-3 right-4 z-[150] ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -129,7 +127,9 @@ function CartDrawer() {
           <div className="overflow-auto p-6 h-[calc(100vh-135px)] ">
             <div className="flex items-center gap-4 text-gray-800">
               <h3
-                className={`text-2xl  flex-1 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
+                className={`text-2xl  flex-1 ${
+                  isHighContrast ? "font-extrabold" : "font-bold"
+                } ${isTextSpace ? "tracking-widest " : ""}`}
                 onMouseEnter={() => handleSpeak("Shopping Cart")}
               >
                 Shopping cart
@@ -159,7 +159,13 @@ function CartDrawer() {
 
                   <div className="grid md:grid-cols-3 items-start gap-4">
                     <div className="col-span-2 flex items-start gap-4">
-                      <div className={`shrink-0 p-2 rounded-md ${isLineHeight? "md:w-32 md:h-32 max-sm:w-28 max-sm:h-28 bg-gray-100" : "max-sm:w-24 max-sm:h-24 md:w-28 md:h-28 bg-gray-100 "}`}>
+                      <div
+                        className={`shrink-0 p-2 rounded-md ${
+                          isLineHeight
+                            ? "md:w-32 md:h-32 max-sm:w-28 max-sm:h-28 bg-gray-100"
+                            : "max-sm:w-24 max-sm:h-24 md:w-28 md:h-28 bg-gray-100 "
+                        }`}
+                      >
                         <img
                           alt={item.artist}
                           src={item.img}
@@ -170,14 +176,24 @@ function CartDrawer() {
                       <div className={`flex flex-col`}>
                         {/*    */}
                         <h3
-                          className={`font-bold truncate text-balance text-gray-800 ${isLineHeight ? "md:h-12 h-12 leading-relaxed " : "md:h-11 h-11"} ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSize? "text-base" : "text-sm"} ${isTextSpace ? "tracking-wider" : ""}`}
+                          className={`font-bold truncate text-balance text-gray-800 ${
+                            isLineHeight
+                              ? "md:h-12 h-12 leading-relaxed "
+                              : "md:h-11 h-11"
+                          } ${
+                            isHighContrast ? "font-extrabold" : "font-bold"
+                          } ${isTextSize ? "text-base" : "text-sm"} ${
+                            isTextSpace ? "tracking-wider" : ""
+                          }`}
                           onMouseEnter={() => handleSpeak(item.artist)}
                         >
                           {item.artist}
                         </h3>
-                        
+
                         <p
-                          className={`text-base font-semibold  ${isTextSpace ? "tracking-widest " : ""}  text-gray-500 mt-0.5`} 
+                          className={`text-base font-semibold  ${
+                            isTextSpace ? "tracking-widest " : ""
+                          }  text-gray-500 mt-0.5`}
                           onMouseEnter={() => handleSpeak(item.dimension)}
                         >
                           {item.dimension}
@@ -213,7 +229,9 @@ function CartDrawer() {
 
                     <div className="col-span-2 flex justify-between items-center md:col-span-1 md:flex-col md:ml-auto ">
                       <h4
-                        className={`text-lg max-sm:text-base text-gray-800 ${isHighContrast? "font-extrabold" : "font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}
+                        className={`text-lg max-sm:text-base text-gray-800 ${
+                          isHighContrast ? "font-extrabold" : "font-bold"
+                        } ${isTextSpace ? "tracking-widest " : ""}`}
                         onMouseEnter={() =>
                           handleSpeak(`$ ${item.price * item.quantity}`)
                         }
@@ -226,7 +244,7 @@ function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => {
-                            dispatch(decreaseQuantity(item.id ));
+                            dispatch(decreaseQuantity(item.id));
                           }}
                         >
                           <svg
@@ -272,8 +290,14 @@ function CartDrawer() {
               );
             })}
           </div>
-          
-          <div className={`py-3 px-6 absolute bottom-0 w-full border-t bg-white ${isTextSize? "text-xl" : "text-lg"} ${isHighContrast? "font-extrabold" : " font-bold"} ${isTextSpace ? "tracking-widest " : ""}`}>
+
+          <div
+            className={`py-3 px-6 absolute bottom-0 w-full border-t bg-white ${
+              isTextSize ? "text-xl" : "text-lg"
+            } ${isHighContrast ? "font-extrabold" : " font-bold"} ${
+              isTextSpace ? "tracking-widest " : ""
+            }`}
+          >
             <ul className="text-gray-800 divide-y">
               <li className="flex flex-wrap gap-4 ">
                 <span onMouseEnter={() => handleSpeak("Subtotal")}>
@@ -293,10 +317,13 @@ function CartDrawer() {
                 className="mt-6 text-sm font-semibold px-6 py-3 w-full bg-primary_alt hover:bg-primary  text-white rounded-md tracking-wide"
                 onMouseEnter={() => handleSpeak("Checkout")}
               >
-                <span className={`${ isLinkHighLight ? "text-yellow-500 bg-white" : "" }`}>
-                Checkout
+                <span
+                  className={`${
+                    isLinkHighLight ? "text-yellow-500 bg-white" : ""
+                  }`}
+                >
+                  Checkout
                 </span>
-                
               </button>
             </NavLink>
           </div>

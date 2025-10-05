@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { MdAccessibility, MdTextFields, MdZoomInMap } from "react-icons/md";
+import {
+  MdAccessibility,
+  MdTextFields,
+  MdZoomInMap,
+  MdContrast,
+} from "react-icons/md";
 import { RiTextSpacing, RiVoiceprintFill } from "react-icons/ri";
-// import { LuMousePointer2 } from "react-icons/lu";
-import { MdContrast } from "react-icons/md";
 import { CgDropInvert } from "react-icons/cg";
+import { FaItalic, FaLink, FaTextHeight } from "react-icons/fa";
 import {
   toggleSpeak,
   stopSpeech,
   speakText,
   toggleHighContrast,
   toggleTextSize,
-  // toggleCursorSize,
   toggleFontStyle,
   toggleLineHeight,
   toggleTextSpacing,
@@ -19,9 +22,8 @@ import {
   toggleSaturation,
   toggleZoomIn,
 } from "../Redux/accessibility/index";
-import { FaItalic, FaLink, FaTextHeight } from "react-icons/fa";
 
-const Accessibility = ()=> {
+const Accessibility = () => {
   const dispatch = useDispatch();
 
   const {
@@ -37,22 +39,16 @@ const Accessibility = ()=> {
     isSaturation,
   } = useSelector((state) => state.accessibility);
 
-  // Cursor Size
-
   useEffect(() => {
     document.body.className = isCursorSize ? "large-cursor" : "default-cursor";
   }, [isCursorSize]);
 
-  // Font Style
   useEffect(() => {
     document.body.className = isFontStyle ? "italic" : "normal";
   }, [isFontStyle]);
 
-  // Zoom the screen
   useEffect(() => {
     document.body.style.zoom = isZoomIn ? 1.09 : 1;
-    // document.body.style.transform = `scale(${zoomLevel})`;
-    // document.body.style.transformOrigin = "0 0";  // Ensures scaling starts from the top-left corner
   }, [isZoomIn]);
 
   const handleSpeak = () => {
@@ -75,10 +71,6 @@ const Accessibility = ()=> {
     dispatch(toggleTextSize());
   };
 
-  // const handleCursorSize = () => {
-  //   dispatch(toggleCursorSize());
-  // };
-
   const handleFontStyle = () => {
     dispatch(toggleFontStyle());
   };
@@ -99,12 +91,62 @@ const Accessibility = ()=> {
     dispatch(toggleSaturation());
   };
 
+  const CheckboxIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-3.5 w-3.5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="1"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+
+  const AccessibilityButton = ({
+    isActive,
+    onClick,
+    icon,
+    activeText,
+    inactiveText,
+    checked,
+    onChange,
+  }) => (
+    <div
+      className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
+        isActive ? "border-black" : ""
+      }`}
+      onClick={onClick}
+    >
+      <div className="absolute top-1 right-1 w-5 h-3">
+        <label className="flex items-center cursor-pointer relative">
+          <input
+            type="checkbox"
+            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
+            checked={checked}
+            onChange={onChange}
+          />
+          <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <CheckboxIcon />
+          </span>
+        </label>
+      </div>
+      {icon}
+      <p className="font-bold text-base">
+        {isActive ? activeText : inactiveText}
+      </p>
+    </div>
+  );
+
   return (
     <div className="drawer w-20 fixed bottom-3 left-4 z-[150]">
       <input id="my-drawer-5" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        {/* View Cart Button */}
-
         <label htmlFor="my-drawer-5" className="drawer-button">
           <div
             role="button"
@@ -122,18 +164,19 @@ const Accessibility = ()=> {
         <label
           htmlFor="my-drawer-5"
           aria-label="close sidebar"
-          className="drawer-overlay "
+          className="drawer-overlay"
         ></label>
 
-        <div className="w-full max-w-xl bg-gray-200 shadow-lg relative h-full z-[1001] ">
-          <div className="overflow-auto  p-2 py-6 h-full md:p-5">
+        <div className="w-full max-w-xl bg-gray-200 shadow-lg relative h-full z-[1001]">
+          <div className="overflow-auto p-2 py-6 h-full md:p-5">
             <div className="flex items-center gap-4 rounded-lg text-white bg-black py-2 px-3">
               <h3
-                className={`text-2xl  flex-1 underline ${isHighContrast ? "font-extrabold" : "font-bold" } ${isTextSpace ? "tracking-widest " : ""}`}
-                // onMouseEnter={() => handleSpeak("Acessibility")}
-                onMouseEnter={() => dispatch(speakText("Acessibility"))}
-                >
-                Acessibility
+                className={`text-2xl flex-1 underline ${
+                  isHighContrast ? "font-extrabold" : "font-bold"
+                } ${isTextSpace ? "tracking-widest" : ""}`}
+                onMouseEnter={() => dispatch(speakText("Accessibility"))}
+              >
+                Accessibility
               </h3>
               <label htmlFor="my-drawer-5">
                 <svg
@@ -154,428 +197,109 @@ const Accessibility = ()=> {
             </div>
 
             <div className="w-full h-[100%] md:h-[88%] mt-3 grid justify-items-center content-between gap-y-10 md:gap-0 grid-cols-2 grid-rows-5 md:grid-cols-3 md:grid-rows-4">
-              
-
-              {/* Contrast Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isHighContrast ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isHighContrast}
                 onClick={handleHighContrast}
-              >
-                {/* Checked Button */}
-                <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isHighContrast}
-                      onChange={handleHighContrast}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <MdContrast className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isHighContrast ? "High Contrast" : "Low Contrast"}
-                </p>
-              </div>
+                icon={<MdContrast className="text-3xl" />}
+                activeText="High Contrast"
+                inactiveText="Low Contrast"
+                checked={isHighContrast}
+                onChange={handleHighContrast}
+              />
 
-              {/* Speak Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isSpeechEnabled ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isSpeechEnabled}
                 onClick={handleSpeak}
-              >
-                {/* Checked Button */}
-                <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isSpeechEnabled}
-                      onChange={handleSpeak}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <RiVoiceprintFill className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isSpeechEnabled ? "Voice ON" : "Voice OFF"}
-                </p>
-              </div>
+                icon={<RiVoiceprintFill className="text-3xl" />}
+                activeText="Voice ON"
+                inactiveText="Voice OFF"
+                checked={isSpeechEnabled}
+                onChange={handleSpeak}
+              />
 
-              {/* High-Light-Link Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isLinkHighLight ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isLinkHighLight}
                 onClick={handleLinkHighLight}
-              >
-                 {/* Checked Button */}
-                 <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isLinkHighLight}
-                      onChange={handleLinkHighLight}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <FaLink className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isLinkHighLight ? "HighLight On" : "HighLight OFF"}
-                </p>
-              </div>
+                icon={<FaLink className="text-3xl" />}
+                activeText="Highlight ON"
+                inactiveText="Highlight OFF"
+                checked={isLinkHighLight}
+                onChange={handleLinkHighLight}
+              />
 
-              {/* Text Size Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isTextSize ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isTextSize}
                 onClick={handleTextSize}
-              >
-                {/* Checked Button */}
-                <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isTextSize}
-                      onChange={handleTextSize}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <MdTextFields
-                  className={`${isTextSize ? "text-3xl" : "text-2xl"}`}
-                />
-                <p className="font-bold text-base">
-                  {isTextSize ? "Big_Text On" : "Big_Text OFF"}
-                </p>
-              </div>
+                icon={
+                  <MdTextFields
+                    className={isTextSize ? "text-3xl" : "text-2xl"}
+                  />
+                }
+                activeText="Big Text ON"
+                inactiveText="Big Text OFF"
+                checked={isTextSize}
+                onChange={handleTextSize}
+              />
 
-              {/* Font Style Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isFontStyle ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isFontStyle}
                 onClick={handleFontStyle}
-              >
-                {/* Checked Button */}
-                 <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isFontStyle}
-                      onChange={handleTextSize}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <FaItalic className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isFontStyle ? "ITACLIC ON" : "ITACLIC OFF"}
-                </p>
-              </div>
+                icon={<FaItalic className="text-3xl" />}
+                activeText="ITALIC ON"
+                inactiveText="ITALIC OFF"
+                checked={isFontStyle}
+                onChange={handleFontStyle}
+              />
 
-              {/* Cursor Size Button ********** Image Issue*/}
-              {/* <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isCursorSize ? "border-black" : ""
-                }`}
-                onClick={handleCursorSize}
-              >
-                Checked Button *********
-                <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isCursorSize}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                
-                <LuMousePointer2 className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isCursorSize ? "Big Cursor" : "Normal Cursor"}
-                </p>
-              </div> */}
-
-              {/* Line Height Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isLineHeight ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isLineHeight}
                 onClick={handleLineHeight}
-              >
-               {/* Checked Button */}
-               <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isLineHeight}
-                      onChange={handleLineHeight}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <FaTextHeight
-                  className={`${isLineHeight ? "text-3xl" : "text-2xl"}`}
-                />
-                <p className="font-bold text-base">
-                  {isLineHeight ? "Line Height ON" : "Line Height OFF"}
-                </p>
-              </div>
+                icon={
+                  <FaTextHeight
+                    className={isLineHeight ? "text-3xl" : "text-2xl"}
+                  />
+                }
+                activeText="Line Height ON"
+                inactiveText="Line Height OFF"
+                checked={isLineHeight}
+                onChange={handleLineHeight}
+              />
 
-              {/* text Spacing Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isTextSpace ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isTextSpace}
                 onClick={handleTextSpacing}
-              >
-                {/* Checked Button */}
-                <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isTextSpace}
-                      onChange={handleTextSpacing}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <RiTextSpacing className="text-3xl" />
-                <p className="font-bold text-base">
-                  {isTextSpace ? "Text Space ON" : "Text Space OFF"}
-                </p>
-              </div>
+                icon={<RiTextSpacing className="text-3xl" />}
+                activeText="Text Space ON"
+                inactiveText="Text Space OFF"
+                checked={isTextSpace}
+                onChange={handleTextSpacing}
+              />
 
-              {/* Saturated Button */}
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isSaturation ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isSaturation}
                 onClick={handleSaturation}
-              >
-               {/* Checked Button */}
-               <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isSaturation}
-                      onChange={handleSaturation}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <CgDropInvert className="text-3xl" />
-                <p className="font-bold text-base">
-                  {`${isSaturation ? "Saturation ON" : "Saturation OFF"}`}
-                </p>
-              </div>
+                icon={<CgDropInvert className="text-3xl" />}
+                activeText="Saturation ON"
+                inactiveText="Saturation OFF"
+                checked={isSaturation}
+                onChange={handleSaturation}
+              />
 
-              {/*Zoom in Button  */}
-
-              <div
-                className={`w-32 h-20 relative flex flex-col justify-center items-center rounded-xl cursor-pointer border-2 md:w-32 md:h-20 xlg:w-36 xlg:h-24 bg-white hover:border-black ${
-                  isZoomIn ? "border-black" : ""
-                }`}
+              <AccessibilityButton
+                isActive={isZoomIn}
                 onClick={handleZoomIn}
-              >
-              {/* Checked Button */}
-              <div className="absolute top-1 right-1 w-5 h-3">
-                  <label className="flex items-center cursor-pointer relative">
-                    <input
-                      type="checkbox"
-                      className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                      id="check4"
-                      checked={isZoomIn}
-                      onChange={handleZoomIn}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3.5 w-3.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-                <MdZoomInMap className="text-3xl" />
-                <p className="font-bold text-base">
-                  {`${isZoomIn ? "Zoom In" : "Default"}`}
-                </p>
-              </div>
+                icon={<MdZoomInMap className="text-3xl" />}
+                activeText="Zoom In"
+                inactiveText="Default"
+                checked={isZoomIn}
+                onChange={handleZoomIn}
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Accessibility;

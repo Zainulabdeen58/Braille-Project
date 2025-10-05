@@ -14,20 +14,17 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function ArtWork() {
-  const isHighContrast = useSelector(
-    (state) => state.accessibility.isHighContrast
-  );
-  const isTextSize = useSelector((state) => state.accessibility.isTextSize);
-  const isTextSpace = useSelector((state) => state.accessibility.isTextSpace);
-  const isLineHeight = useSelector((state) => state.accessibility.isLineHeight);
-  const isLinkHighLight = useSelector(
-    (state) => state.accessibility.isLinkHighLight
-  );
+  const {
+    isHighContrast,
+    isTextSize,
+    isTextSpace,
+    isLineHeight,
+    isLinkHighLight,
+  } = useSelector((state) => state.accessibility);
 
   const favouriteItems = useSelector((state) => state.FavouriteList.items);
   const dispatch = useDispatch();
-  const cardsRef = useRef([]);  
-
+  const cardsRef = useRef([]);
 
   // Gsap animation code
   // useEffect(() => {
@@ -39,13 +36,13 @@ function ArtWork() {
   //       opacity: 1,
   //       y: 0,
   //       duration: 1,
-  //       stagger: 0.2, 
+  //       stagger: 0.2,
   //       ease: "power3.out",
   //       scrollTrigger: {
   //         trigger: "#Projects",
   //         markers:true,
-  //         start: "top 70%", 
-  //         end:   "bottom top", 
+  //         start: "top 70%",
+  //         end:   "bottom top",
   //         scrub: true,
   //         toggleActions: "play none none reverse",
   //       },
@@ -76,12 +73,16 @@ function ArtWork() {
   return (
     <>
       <Container>
-        <section 
+        <section
           id="Projects "
           className={`w-fit mx-auto mt-5 mb-3 grid grid-cols-1 justify-items-center justify-around gap-y-12 gap-x-14 md:grid-cols-2 md:gap-x-5 lg:grid-cols-4 2xlg:gap-x-8 
             ${isTextSpace ? "tracking-widest" : ""} 
             ${isLineHeight ? "leading-loose" : ""} 
-            ${isHighContrast ? "font-bold text-black" : "font-medium text-gray-400"}`}
+            ${
+              isHighContrast
+                ? "font-bold text-black"
+                : "font-medium text-gray-400"
+            }`}
         >
           {Data.map((product, index) => {
             const isFavourite = favouriteItems.some(
@@ -102,7 +103,7 @@ function ArtWork() {
                     }`}
                     loading="lazy"
                   />
-                  
+
                   {/* HighLight Accessibility  */}
                   <span
                     className={`${

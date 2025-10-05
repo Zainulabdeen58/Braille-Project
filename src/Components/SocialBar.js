@@ -13,16 +13,13 @@ function SocialBar() {
     <div className="w-full hidden md:flex justify-end  bg-primary ">
       <div className="w-64 h-9 flex justify-around items-center bg-black">
         <NavLink>
-
-        <FaFacebookSquare className="text-xl cursor-pointer text-white lg:text-2xl" />
+          <FaFacebookSquare className="text-xl cursor-pointer text-white lg:text-2xl" />
         </NavLink>
         <NavLink>
-
-        <FaTwitterSquare className="text-xl text-white cursor-pointer  lg:text-2xl" />
+          <FaTwitterSquare className="text-xl text-white cursor-pointer  lg:text-2xl" />
         </NavLink>
         <NavLink to={"https://www.instagram.com/accounts/login/"}>
-
-        <FaInstagramSquare className="text-xl text-white cursor-pointer  lg:text-2xl" />
+          <FaInstagramSquare className="text-xl text-white cursor-pointer  lg:text-2xl" />
         </NavLink>
 
         <NavLink to={"/wishlist"}>
@@ -32,7 +29,6 @@ function SocialBar() {
         <NavLink to={"/cart"}>
           <FiShoppingBag className="text-xl text-white cursor-pointer  lg:text-2xl" />
         </NavLink>
-        
       </div>
     </div>
   );
