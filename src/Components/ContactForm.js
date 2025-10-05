@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -19,10 +19,10 @@ export function ContactForm() {
   });
 
   const messageLimit = 1000;
-  const charsLeft = useMemo(
-    () => Math.max(0, messageLimit - form.message.length),
-    [form.message]
-  );
+  // const charsLeft = useMemo(
+  //   () => Math.max(0, messageLimit - form.message.length),
+  //   [form.message]
+  // );
 
   async function onSubmit(e) {
     e.preventDefault();

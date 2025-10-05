@@ -1,4 +1,4 @@
-export { ContactForm } from "./ConstactForm";
+export { ContactForm } from "./ContactForm";
 export { InfoCard } from "./ContactInfoCard";
 export {
   Card,
